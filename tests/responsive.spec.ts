@@ -118,15 +118,19 @@ for (const [width, height] of sizes) {
       if (path !== '/') await open(page, path);
       expect.soft(await layoutProblems(page), path).toEqual([]);
       if (['/about/', '/programs/', '/services/'].includes(path)) {
-        const ctaInsets = await page.locator('main > .page-cta-band').evaluate((band) => {
-          const bounds = band.getBoundingClientRect();
-          const content = band.firstElementChild!;
+        const band = page.locator('main > .page-cta-band');
+        await band.scrollIntoViewIfNeeded();
+        await expect.poll(() => band.evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          const content = element.firstElementChild!;
+          const first = content.firstElementChild!.getBoundingClientRect();
+          const last = content.lastElementChild!.getBoundingClientRect();
+          if (!bounds.height || !first.height || !last.height) return null;
           return [
-            Math.round(content.firstElementChild!.getBoundingClientRect().top - bounds.top),
-            Math.round(bounds.bottom - content.lastElementChild!.getBoundingClientRect().bottom),
+            Math.round(first.top - bounds.top),
+            Math.round(bounds.bottom - last.bottom),
           ];
-        });
-        expect.soft(ctaInsets, `${path} consultation section insets`).toEqual([52, 52]);
+        }), { message: `${path} consultation section insets` }).toEqual([52, 52]);
       }
     }
   });
