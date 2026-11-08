@@ -51,6 +51,8 @@ const {
 
 const canonicalPath = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, Astro.site).toString();
+const reviewDate = new Intl.DateTimeFormat('en-CA', { dateStyle: 'long', timeZone: 'UTC' })
+  .format(new Date(reviewedOn));
 
 const pageSchema = [
   {
@@ -170,7 +172,7 @@ const pageSchema = [
               </ul>
             </div>
 
-            <p class="program-detail-reviewed">Last reviewed: {reviewedOn}</p>
+            <p class="program-detail-reviewed">Last reviewed: <time datetime={reviewedOn}>{reviewDate}</time></p>
           </aside>
 
           <div class="program-detail-content">

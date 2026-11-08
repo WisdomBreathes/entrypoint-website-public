@@ -58,3 +58,29 @@ test('confirmation and error pages are excluded from indexing', async ({ page })
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /\bnoindex\b/i);
   }
 });
+
+test('program review dates match structured data and the sitemap', async ({ page, request }) => {
+  const sitemap = await request.get('/sitemap.xml');
+  const lastModified = await page.evaluate((xml) => {
+    const document = new DOMParser().parseFromString(xml, 'application/xml');
+    return Object.fromEntries(Array.from(document.getElementsByTagName('url'), (entry) => [
+      entry.getElementsByTagName('loc')[0]?.textContent,
+      entry.getElementsByTagName('lastmod')[0]?.textContent,
+    ]));
+  }, await sitemap.text());
+
+  for (const path of publicPaths.filter((path) => path.startsWith('/programs/'))) {
+    await test.step(path, async () => {
+      await page.goto(path);
+      const date = await page.locator('main time[datetime]').getAttribute('datetime');
+      expect(date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      const modifiedDate = await page.locator('script[type="application/ld+json"]').evaluateAll(
+        (scripts, url) => scripts.flatMap((script) => JSON.parse(script.textContent ?? 'null'))
+          .find((entity) => entity?.url === url && entity.dateModified)?.dateModified,
+        site + path,
+      );
+      expect(modifiedDate).toBe(date);
+      expect(lastModified[site + path]).toBe(date);
+    });
+  }
+});

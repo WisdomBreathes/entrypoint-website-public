@@ -117,6 +117,15 @@ for (const [width, height] of sizes) {
     for (const path of paths) {
       if (path !== '/') await open(page, path);
       expect.soft(await layoutProblems(page), path).toEqual([]);
+      if (path === '/programs/' && (width === 390 || width === 1440)) {
+        const cards = page.getByRole('region', { name: 'Canadian Experience Class and Ontario Nomination' }).locator('article');
+        const insets = await cards.evaluateAll((elements) => elements.map((card) => {
+          const note = card.querySelector('.program-card-note')!.getBoundingClientRect();
+          const button = card.querySelector('.btn-gold')!.getBoundingClientRect();
+          return [Math.round(button.top - note.bottom), Math.round(card.getBoundingClientRect().bottom - button.bottom)];
+        }));
+        expect.soft(insets).toEqual([[40, 25], [40, 25]]);
+      }
       if (['/about/', '/programs/', '/services/'].includes(path)) {
         const band = page.locator('main > .page-cta-band');
         await band.scrollIntoViewIfNeeded();

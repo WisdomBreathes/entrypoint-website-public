@@ -20,12 +20,14 @@ const faqs = [
   {
     question: 'Can I move from visitor status to a work permit or another temporary status?',
     answer:
-      'That depends on the program, your eligibility, and whether you qualify under a work permit category that can be pursued from inside Canada. Some people may have an employer-specific route, an LMIA-based option, or another status strategy, while others may need to apply from outside Canada. The important step is reviewing the full timeline before taking action so status is protected where possible.',
+      'Most visitors cannot apply for a work permit from inside Canada unless they qualify for a specific exception. Visitor status does not authorize work, and a job offer or an LMIA does not by itself make you eligible to apply from inside Canada. Check IRCC\'s rules before applying or starting work.',
+    source: { label: 'IRCC eligibility for in-Canada work permit applications', href: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/permit-inside/eligibility.html' },
   },
   {
     question: 'Is my CRS score high enough for Express Entry right now?',
     answer:
-      'There is no single number that guarantees an invitation because Express Entry draws change over time and may target specific categories. A score that is competitive in one round may not be enough in another. The better question is whether your profile can be strengthened through language scores, education assessment, work experience, arranged employment, or a provincial nomination.',
+      'No single CRS score guarantees an invitation. Cutoffs vary by round, and you still need to meet the criteria for that round. Since November 3, 2026, IRCC has used new rules to score Canadian work experience and qualifying job offers in eligible high-wage occupations. Not every valid job offer earns CRS points.',
+    source: { label: 'IRCC Express Entry scoring changes', href: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/changes.html' },
   },
   {
     question: 'How long does family sponsorship usually take?',
@@ -74,6 +76,7 @@ const faqSchema = {
             <div style="padding: 0 0 18px; border-top: 1px solid #E8E3D9;">
               <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #42445A; line-height: 1.85; padding-top: 16px;">
                 {faq.answer}
+                {faq.source && <> <a href={faq.source.href}>{faq.source.label}</a>.</>}
               </p>
             </div>
           </details>
@@ -85,6 +88,12 @@ const faqSchema = {
 </section>
 
 <style>
+  .faq-item p a {
+    color: #1C2456;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
   .faq-item summary::-webkit-details-marker {
     display: none;
   }

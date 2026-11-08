@@ -30,7 +30,7 @@ const programsPageSchema = [
     name: 'How to Immigrate to Canada',
     description: 'Overview of Canadian immigration pathways including Express Entry, Provincial Nominee Program, Ontario Immigrant Nominee Program updates, Canadian Experience Class, post-graduation work permits, LMIA-supported work permits, family sponsorship, and specialist streams.',
     url: 'https://entrypointcanada.com/programs/',
-    dateModified: '2026-11-07',
+    dateModified: '2026-11-08',
     inLanguage: 'en-CA',
     isPartOf: {
       '@type': 'WebSite',
@@ -54,7 +54,7 @@ const programsPageSchema = [
       itemListElement: [
         { name: 'Express Entry' },
         { name: 'Provincial Nominee Program (PNP)' },
-        { name: 'Canadian Experience Class and in-Canada applicants' },
+        { name: 'Canadian Experience Class' },
         { name: 'Ontario Workforce Priority Stream', url: 'https://entrypointcanada.com/programs/oinp/' },
         { name: 'Study Permit and Post-Graduation Work Permit', url: 'https://entrypointcanada.com/programs/pgwp/' },
         { name: 'Employer Work Permits and LMIA Support' },
@@ -115,7 +115,7 @@ const programsPageSchema = [
           How to immigrate to Canada
         </h1>
         <p style="font-family: Inter, sans-serif; font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 600px;">
-          Start by deciding whether you want to settle permanently, join family, or come to Canada to study or work. Each goal has different programs and requirements.
+          Moving to Canada permanently is different from coming to study or work. Compare the options below and find the official requirements for the one that fits your plans.
         </p>
       </div>
     </section>
@@ -124,7 +124,6 @@ const programsPageSchema = [
       <div class="section-container">
         <p class="programs-start-eyebrow">Start here</p>
         <h2 id="programs-start-heading">Which pathway fits your goal?</h2>
-        <p class="programs-start-lead">Start by identifying what you are trying to do. Each goal leads to different programs and timelines.</p>
 
         <div class="programs-start-grid">
 
@@ -135,7 +134,7 @@ const programsPageSchema = [
           </div>
 
           <div class="programs-start-card">
-            <span class="programs-start-tag">Family class</span>
+            <span class="programs-start-tag">Family sponsorship</span>
             <h3>Join family in Canada</h3>
             <p>Read about <a href={`${base}programs/spousal-sponsorship/`}>sponsoring a spouse, partner, or dependent child</a> and the evidence to consider before applying.</p>
           </div>
@@ -148,7 +147,7 @@ const programsPageSchema = [
 
         </div>
 
-        <p class="programs-start-note">Before applying, compare current eligibility and application instructions on <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada.html">Immigration, Refugees and Citizenship Canada's program directory</a>.</p>
+        <p class="programs-start-note">Compare current requirements with the <a href="https://ircc.canada.ca/explore-programs/">IRCC program finder</a>. If you plan to settle in a participating smaller community, check the <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots.html">Rural and Francophone Community Immigration Pilots</a> for local employer and intake requirements.</p>
       </div>
     </section>
 
@@ -162,7 +161,7 @@ const programsPageSchema = [
             Express Entry &amp; Provincial Nominee Programs
           </h2>
           <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: #45465E; line-height: 1.7; max-width: 640px;">
-            These are the two main systems used for economic permanent residence and are often the first programs reviewed when assessing long-term eligibility.
+            Express Entry ranks eligible candidates for federal skilled worker programs. Provinces and territories can also nominate people who meet their own requirements.
           </p>
         </div>
 
@@ -172,7 +171,7 @@ const programsPageSchema = [
           <article class="program-card" style="background: #ffffff; border-radius: 10px; border: 1px solid #E8E3D9; overflow: hidden; display: flex; flex-direction: column;">
             <div style="padding: 24px 24px 16px;">
               <div class="program-meta-row">
-                <span>Federal program</span>
+                <span>Federal system</span>
                 <span>Permanent residence</span>
               </div>
               <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: #1A1A2E; line-height: 1.25; margin-bottom: 12px;">
@@ -182,16 +181,16 @@ const programsPageSchema = [
                 Express Entry is Canada's online application system for several federal economic permanent residence programs. It covers the Federal Skilled Worker Program, the Federal Skilled Trades Program, and the Canadian Experience Class, as well as a portion of the Provincial Nominee Program.
               </p>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 16px;">
-                Candidates create a profile and enter a pool ranked by the Comprehensive Ranking System (CRS). IRCC regularly issues Invitations to Apply (ITAs) through draws, which target either all eligible candidates or specific occupational categories.
+                Eligible candidates enter a pool and are ranked by the Comprehensive Ranking System (CRS). IRCC can hold general, program-specific, or category-based draws. Meeting a category's criteria does not replace eligibility for one of the three federal programs.
               </p>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 24px;">
-                As of March 31, 2026, IRCC lists category-based selection streams for French-language proficiency, healthcare and social services, STEM, trades, education, transport, physicians with Canadian work experience, senior managers with Canadian work experience, researchers with Canadian work experience, and skilled military recruits. Draws are held regularly throughout the year, but categories and priorities can change.
+                <strong>November 3, 2026 update:</strong> IRCC now compares points for qualifying Canadian work experience against points for a qualifying job offer in an eligible high-wage occupation. It uses the higher score, not both. Express Entry no longer requires a Labour Market Impact Assessment (LMIA) for a job offer to qualify, but work permit rules are separate.
               </p>
               <ul style="list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px;">
                 {[
                   'Skilled work experience in an eligible NOC occupation',
                   'Language proficiency in English or French (CLB/NCLC varies by program)',
-                  'Educational credentials meeting program minimums',
+                  'Education and other eligibility requirements where applicable',
                   'Meeting the specific requirements of at least one Express Entry program',
                 ].map((item) => (
                   <li style="display: flex; align-items: flex-start; gap: 10px;">
@@ -201,7 +200,7 @@ const programsPageSchema = [
                 ))}
               </ul>
               <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #9C9C9C; line-height: 1.65; margin-bottom: 24px;">
-                Express Entry categories and CRS cut-off scores change with each draw. Eligibility should be assessed against current IRCC requirements.
+                A job offer may count toward program eligibility without earning CRS points. See IRCC's <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/job-offer.html" style="color: #1C2456; text-decoration: underline;">job offer and profile instructions</a>, <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/changes.html" style="color: #1C2456; text-decoration: underline;">scoring changes</a>, and <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html" style="color: #1C2456; text-decoration: underline;">latest invitation rounds</a>.
               </p>
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
@@ -226,17 +225,17 @@ const programsPageSchema = [
                 The Provincial Nominee Program allows Canadian provinces and territories to nominate candidates for permanent residence based on local labour market and economic needs. Each province operates its own streams with distinct eligibility criteria, occupation lists, and intake schedules.
               </p>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 16px;">
-                Many PNP streams are aligned with Express Entry. A provincial nomination can add 600 CRS points, which can make a candidate highly competitive in the Express Entry pool. Other streams operate outside Express Entry through a separate non-Express Entry process.
+                Accepting an Express Entry nomination adds 600 CRS points. Other streams use a non-Express Entry process. A nomination is not permanent residence; IRCC makes the final decision.
               </p>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 24px;">
-                Active PNP programs exist across British Columbia, Ontario, Alberta, Saskatchewan, Manitoba, Nova Scotia, New Brunswick, Prince Edward Island, Newfoundland and Labrador, Northwest Territories, and Yukon, but each program can change its intake, categories, and application steps.
+                Compare the streams where you genuinely intend to settle. Quebec and Nunavut do not have a PNP. If you intend to settle in Ontario, check the <a href={`${base}programs/oinp/`} style="color: #1C2456; text-decoration: underline;">Ontario Workforce Priority stream</a>.
               </p>
               <ul style="list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px;">
                 {[
-                  'Job offer from a provincial employer, or',
-                  'Expression of Interest submitted to a provincial pool, or',
-                  'Nomination through an Express Entry-aligned stream',
-                  'Meeting the specific occupation, language, and settlement fund requirements of the target province',
+                  'Eligibility for the specific provincial or territorial stream',
+                  'A qualifying job offer or connection to the province where required',
+                  'An expression of interest or invitation where the stream requires one',
+                  'Separate Express Entry eligibility if using an aligned stream',
                 ].map((item) => (
                   <li style="display: flex; align-items: flex-start; gap: 10px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C2456" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -260,20 +259,17 @@ const programsPageSchema = [
       </div>
     </section>
 
-    <!-- Section 1: Time-Sensitive Programs -->
-    <section style="background: #FAF7F2; padding: 56px 0;">
+    <!-- Canadian experience and Ontario nomination -->
+    <section aria-labelledby="canadian-experience-ontario" style="background: #FAF7F2; padding: 56px 0;">
       <div class="section-container">
 
         <div style="margin-bottom: 32px;">
-          <p class="program-section-kicker" style="color: #92400E;">Time-Sensitive</p>
-          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
-            Programs with Current or Recent Intake Windows
+          <p class="program-section-kicker" style="color: #92400E;">Canadian experience and employment</p>
+          <h2 id="canadian-experience-ontario" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
+            Canadian Experience Class and Ontario Nomination
           </h2>
           <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: #45465E; line-height: 1.7; max-width: 640px;">
-            Some programs move quickly because they open in limited rounds, depend on community recommendation, or fill once intake caps are reached.
-          </p>
-          <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #9C9C9C; margin-top: 10px; line-height: 1.65; max-width: 640px;">
-            Availability, eligibility, and intake periods may change without notice based on IRCC, provincial, or pilot program updates.
+            The Canadian Experience Class looks at qualifying work you have already done in Canada. Ontario's stream has separate rules for people with a job offer and for self-employed physicians.
           </p>
         </div>
 
@@ -284,20 +280,20 @@ const programsPageSchema = [
             <div class="program-card-body program-card-body-balanced" style="padding: 24px 24px 16px;">
               <div class="program-meta-row">
                 <span>Express Entry program</span>
-                <span>In-Canada profiles</span>
+                <span>Canadian work experience</span>
               </div>
               <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: #1A1A2E; line-height: 1.25; margin-bottom: 12px;">
-                Canadian Experience Class and In-Canada Applicants
+                Canadian Experience Class
               </h3>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 24px;">
-                The original Temporary Resident to Permanent Resident Pathway is closed and stopped accepting applications on November 5, 2021. Applicants in Canada may still have permanent residence options through active programs, including the Canadian Experience Class, provincial nominee streams, or another category that fits their work experience, status, language results, and admissibility.
+                The Canadian Experience Class (CEC) is for people with skilled Canadian work experience. No job offer or educational credential is required, but you still need an Express Entry invitation.
               </p>
               <ul style="list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px;">
                 {[
-                  'Skilled Canadian work experience that supports eligibility under Express Entry or another active pathway',
-                  'Valid temporary status in Canada and a possible route to permanent residence through an active program',
-                  'Language results, education, and admissibility requirements matching the selected pathway',
-                  'A profile that may fit the Canadian Experience Class, a provincial nominee stream, or another active program',
+                  'One year (1,560 hours) of qualifying paid work in the past three years',
+                  'Work in a TEER 0-3 occupation while authorized to work in Canada',
+                  'An approved English or French test at the required level',
+                  'Full-time student work is excluded, as is self-employment except for some physicians',
                 ].map((item) => (
                   <li style="display: flex; align-items: flex-start; gap: 10px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4973A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -307,7 +303,7 @@ const programsPageSchema = [
               </ul>
               <div class="program-card-note" style="background: #FFFBEB; border: 1px solid #F0D080; border-radius: 8px; padding: 14px 16px; margin-bottom: 24px;">
                 <p style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 400; color: #78350F; line-height: 1.6; margin: 0;">
-                  <strong>Important update:</strong> The old TR to PR pathway closed on November 5, 2021. Some people with a pending 2021 application may qualify for an open work permit until December 31, 2026, but new permanent residence applications are not being accepted under that pathway.
+                  <strong>Not a new TR to PR intake:</strong> The <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-5069-temporary-resident-permanent-resident-pathway.html" style="color: inherit; text-decoration: underline;">2021 pathway</a> remains closed. The <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/immigration-system/measures.html" style="color: inherit; text-decoration: underline;">In-Canada Workers Initiative</a> speeds up selected permanent residence files already submitted; it does not accept separate applications.
                 </p>
               </div>
             </div>
@@ -330,14 +326,14 @@ const programsPageSchema = [
                 Ontario Workforce Priority Stream
               </h3>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 24px;">
-                Ontario replaced eight former Ontario Immigrant Nominee Program streams with the Ontario Workforce Priority stream in June 2026. The new stream has categories for eligible workers with Ontario job offers and for eligible self-employed physicians.
+                The Ontario Workforce Priority stream replaced eight former Ontario Immigrant Nominee Program streams in 2026. It serves eligible workers with Ontario job offers and certain self-employed physicians.
               </p>
               <ul style="list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px;">
                 {[
-                  'Ontario workforce priority: TEER 0-3 category',
-                  'Ontario workforce priority: TEER 4-5 category',
-                  'Ontario workforce priority: self-employed physician category',
-                  'Applications already received under the former framework are assessed against the requirements in place at the time of application',
+                  'TEER 0-3 job offer category',
+                  'TEER 4-5 job offer category',
+                  'Self-employed physician category',
+                  'For job-offer categories, the employer starts the process before the worker registers an expression of interest',
                 ].map((item) => (
                   <li style="display: flex; align-items: flex-start; gap: 10px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4973A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -347,7 +343,7 @@ const programsPageSchema = [
               </ul>
               <div class="program-card-note" style="background: #ECFDF5; border: 1px solid #6EE7B7; border-radius: 8px; padding: 14px 16px; margin-bottom: 24px;">
                 <p style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 400; color: #065F46; line-height: 1.6; margin: 0;">
-                  <strong>Portal update:</strong> Ontario opened expressions of interest for the new stream on August 4, 2026. Check the <a href="https://www.ontario.ca/page/ontario-workforce-priority-stream" style="color: inherit; text-decoration: underline;">current Ontario stream criteria</a> before registering.
+                  <strong>Before registering:</strong> Ontario updated its earnings-history scoring in October 2026. Check the <a href="https://www.ontario.ca/page/ontario-workforce-priority-stream" style="color: inherit; text-decoration: underline;">stream criteria and scoring factors</a> separately. Meeting the criteria does not guarantee an invitation.
                 </p>
               </div>
             </div>
@@ -368,12 +364,12 @@ const programsPageSchema = [
       <div class="section-container">
 
         <div style="margin-bottom: 32px;">
-          <p class="program-section-kicker" style="color: #1C2456;">Common Searches</p>
+          <p class="program-section-kicker" style="color: #1C2456;">Study, Work and Family</p>
           <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
-            High-Demand Immigration Pathways
+            Study Permits, Work Permits and Family Sponsorship
           </h2>
           <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: #45465E; line-height: 1.7; max-width: 680px;">
-            These categories match frequent client questions and are supported by current Canada.ca program pages, making them useful starting points for many students, workers, employers, and families.
+            Study and work permits provide temporary status. Family sponsorship is a separate route to permanent residence for eligible relatives.
           </p>
         </div>
 
@@ -394,7 +390,7 @@ const programsPageSchema = [
             <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;">
               {[
                 'Admission to an eligible Canadian school or designated learning institution',
-                'Proof of funds, identity documents, and a complete study plan where needed',
+                'Proof of funds and a provincial or territorial attestation letter if required',
                 'PGWP eligibility based on the program, school, length of study, and current IRCC requirements',
               ].map((item) => (
                 <li style="display: flex; align-items: flex-start; gap: 8px;">
@@ -419,7 +415,7 @@ const programsPageSchema = [
               Employer Work Permits and LMIA Support
             </h3>
             <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 20px; flex: 1;">
-              Employers may need a Labour Market Impact Assessment before a foreign worker can apply for an employer-specific work permit. Some cases may use an LMIA-exempt category under the International Mobility Program instead.
+              An employer may still need an LMIA for an employer-specific work permit, even if the job offer does not require one under Express Entry. Some positions qualify for a separate LMIA exemption under the International Mobility Program.
             </p>
             <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;">
               {[
@@ -449,7 +445,7 @@ const programsPageSchema = [
               Spousal, Partner, and Child Sponsorship
             </h3>
             <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 20px; flex: 1;">
-              Canadian citizens and permanent residents may be able to sponsor an eligible spouse, common-law partner, conjugal partner, or dependent child for permanent residence through the family class.
+              Eligible sponsors may bring a spouse, common-law partner, conjugal partner, or dependent child to Canada as a permanent resident. The applicable class depends on the relationship and where the applicant lives.
             </p>
             <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;">
               {[
@@ -479,13 +475,13 @@ const programsPageSchema = [
 
         <div style="margin-bottom: 32px;">
           <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #1C2456; margin-bottom: 12px;">
-            Specialist Streams
+            Specialized Work Permits
           </p>
           <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
-            Pathways for Unique Profiles
+            Work Permits That May Not Require an LMIA
           </h2>
           <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: #45465E; line-height: 1.7; max-width: 640px;">
-            For some applicants, less commonly discussed categories can offer a more practical route than a standard employer-sponsored application.
+            Separate work permit rules may apply if you plan to run a business, have a job offer outside Quebec and speak French, or have a postdoctoral appointment.
           </p>
         </div>
 
@@ -501,7 +497,7 @@ const programsPageSchema = [
               C11 Entrepreneur Work Permit
             </h3>
             <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 20px; flex: 1;">
-              For foreign nationals who intend to establish, purchase, or invest in a Canadian business. Depending on the structure of the business and the evidence of significant benefit to Canada, this type of case may support an employer-specific work permit while the entrepreneur builds toward a longer-term immigration strategy.
+              An entrepreneur who plans to actively run a business in Canada may qualify for a temporary work permit if the business would bring significant benefit to Canada. Investment alone does not qualify someone for a work permit or permanent residence.
             </p>
             <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;">
               {[
@@ -531,12 +527,12 @@ const programsPageSchema = [
               C16 Francophone Mobility
             </h3>
             <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 20px; flex: 1;">
-              French-speaking workers outside Quebec may have access to this LMIA-exempt work permit, designed to support Canada's Francophone communities outside Quebec. Eligible applicants do not need a Labour Market Impact Assessment for this category.
+              French-speaking workers with a qualifying offer to live and work outside Quebec may be eligible for an employer-specific work permit without an LMIA. This is separate from the Francophone Community Immigration Pilot, which is a permanent residence pathway.
             </p>
             <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;">
               {[
                 'Intermediate French speaking and listening ability, generally equivalent to NCLC 5 or higher',
-                'Offer of employment to live and work outside Quebec',
+                'Employer submits the offer through the IRCC Employer Portal before the worker applies',
                 'Job offer in any NOC TEER category except primary agriculture positions in TEER 4 or 5',
               ].map((item) => (
                 <li style="display: flex; align-items: flex-start; gap: 8px;">
@@ -561,7 +557,7 @@ const programsPageSchema = [
               C44 Postdoctoral Research
             </h3>
             <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 20px; flex: 1;">
-              Doctoral graduates conducting postdoctoral research at a Canadian university or similar institution may qualify for an employer-specific work permit, depending on the position and the applicable IRCC instructions. For some applicants, Canadian research work may also support later permanent residence options, including Express Entry.
+              Eligible postdoctoral fellows with a Canadian research appointment may qualify for an LMIA-exempt, employer-specific work permit. The permit itself does not establish eligibility for permanent residence.
             </p>
             <ul style="list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;">
               {[
@@ -593,14 +589,14 @@ const programsPageSchema = [
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
           <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.8; margin: 0;">
-            <strong style="color: #1A1A2E; font-weight: 500;">Program availability reflected here was reviewed on June 30, 2026 against Canada.ca, Ontario's OINP page, and Ontario e-Laws.</strong> Canadian immigration policy changes frequently — program caps, intake windows, and eligibility criteria can shift with little notice. These summaries are provided for general awareness only and do not constitute regulated immigration advice. A formal consultation with Entrypoint Canada will assess your specific situation against the most current IRCC and provincial guidelines.
-            Source pages reviewed:
+            <strong style="color: #1A1A2E; font-weight: 500;">Check current requirements before applying.</strong> The <a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/immigration-system/levels/supplementary-immigration-levels-2027-2029.html" style="color: #1C2456;">2027-2029 Immigration Levels Plan</a>, released November 5, sets admission targets. It is not an application guide or a guarantee that a program is accepting applications. This overview is general information, not advice on an individual application. Consult the official program sources:
             <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry.html" style="color: #1C2456;">Canada.ca Express Entry</a>,
             <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/canadian-experience-class.html" style="color: #1C2456;">Canada.ca CEC</a>,
             <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html" style="color: #1C2456;">Canada.ca PNP</a>,
             <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html" style="color: #1C2456;">Canada.ca PGWP</a>,
             <a href="https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" style="color: #1C2456;">Canada.ca LMIA/TFWP</a>,
             <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/spouse-partner-children.html" style="color: #1C2456;">Canada.ca family sponsorship</a>,
+            <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/special-instructions/francophone-mobility/eligibility.html" style="color: #1C2456;">Canada.ca Francophone Mobility</a>,
             <a href="https://www.ontario.ca/page/ontario-immigrant-nominee-program-oinp" style="color: #1C2456;">Ontario OINP</a>,
             <a href="https://www.ontario.ca/laws/regulation/170421" style="color: #1C2456;">O. Reg. 421/17</a>, and
             <a href="https://www.ontario.ca/laws/regulation/170422" style="color: #1C2456;">O. Reg. 422/17</a>.
@@ -611,7 +607,7 @@ const programsPageSchema = [
 
     <!-- Last reviewed timestamp -->
     <div style="max-width: 1200px; margin: 0 auto; padding: 20px 56px 0;">
-      <p style="font-family: Inter, sans-serif; font-size: 11px; font-weight: 300; color: #9C9C9C;">Overview reviewed June 30, 2026. OINP information updated November 7, 2026.</p>
+      <p style="font-family: Inter, sans-serif; font-size: 11px; font-weight: 300; color: #9C9C9C;">Last reviewed: <time datetime="2026-11-08">November 8, 2026</time>.</p>
     </div>
 
     <!-- Bottom CTA -->
@@ -664,17 +660,7 @@ const programsPageSchema = [
     font-weight: 600;
     color: #1A1A2E;
     line-height: 1.2;
-    margin: 0 0 10px;
-  }
-
-  .programs-start-lead {
-    font-family: Inter, sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    color: #45465E;
-    line-height: 1.65;
-    margin: 0 0 32px;
-    max-width: 56ch;
+    margin: 0 0 24px;
   }
 
   .programs-start-grid {
@@ -804,7 +790,7 @@ const programsPageSchema = [
   }
 
   .program-card-note {
-    margin-top: 0;
+    margin-top: auto;
   }
 
   .program-card:hover {

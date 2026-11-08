@@ -34,12 +34,15 @@ Key review points include whether the applicant meets the requirements of a curr
     title: 'Family sponsorship',
     guide: { path: 'programs/spousal-sponsorship/', label: 'Spousal, partner, and dependent child sponsorship' },
     tagline: 'Relationship evidence, sponsor eligibility, and complete forms.',
-    description: `Family sponsorship allows eligible Canadian citizens and permanent residents to sponsor certain family members to become permanent residents of Canada. The details matter: sponsor eligibility, relationship evidence, dependent children, financial responsibilities, and whether the applicant may be eligible for an open work permit while the application is in process.
-
-The file often turns on the sponsor's eligibility, the principal applicant's admissibility, the required forms, and the relationship evidence IRCC will expect to see.`,
+    description: `Eligible Canadian citizens, permanent residents, and people registered under the Indian Act may sponsor certain family members for permanent residence. Before applying, check whether you can sponsor, what documents show the relationship, and what financial responsibilities you will take on.`,
+    notice: {
+      label: 'Parents and Grandparents Program',
+      href: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/sponsor-parents-grandparents/apply.html',
+      text: ' is paused for new applications. Eligible parents and grandparents can still apply for a super visa for temporary visits, not permanent residence.',
+    },
     whoFor: [
-      'Canadian citizens or permanent residents sponsoring a spouse or common-law partner',
-      'Those sponsoring parents or grandparents (through the Parents and Grandparents Program)',
+      'Eligible sponsors preparing a spouse or partner application',
+      'Families with an existing parent or grandparent sponsorship application',
       'Sponsors applying for dependent children or other eligible relatives',
       'Spouses or common-law partners in Canada asking about open work permit options',
     ],
@@ -48,7 +51,7 @@ The file often turns on the sponsor's eligibility, the principal applicant's adm
       'Relationship documentation and identity documents',
       'In-Canada or outside-Canada process considerations',
     ],
-    pathways: ['Spouse, common-law partner or conjugal partner sponsorship', 'Dependent child sponsorship', 'Parents and Grandparents Program', 'Sponsorship of other eligible relatives', 'Open work permit options for eligible family members in Canada'],
+    pathways: ['Spouse, common-law partner or conjugal partner sponsorship', 'Dependent child sponsorship', 'Parents and Grandparents Program (intake paused)', 'Sponsorship of other eligible relatives', 'Open work permit options for eligible family members in Canada'],
     borderColor: '#8B1A1A',
     iconBg: '#8B1A1A',
   },
@@ -214,10 +217,15 @@ Early review points include eligibility, deadlines, the correct forum or applica
               <!-- Description -->
               <div>
                 {service.description.split('\n\n').map((para) => (
-                  <p style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 300; color: #3D3D5C; line-height: 1.8; margin-bottom: 16px;">
+                  <p class="service-description">
                     {para}
                   </p>
                 ))}
+                {service.notice && (
+                  <p class="service-description">
+                    The <a href={service.notice.href}>{service.notice.label}</a>{service.notice.text}
+                  </p>
+                )}
                 {service.guide && (
                   <a class="service-guide-link" href={`${base}${service.guide.path}`}>{service.guide.label}</a>
                 )}
@@ -304,6 +312,21 @@ Early review points include eligibility, deadlines, the correct forum or applica
 </Layout>
 
 <style>
+  .service-description {
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #3D3D5C;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .service-description a {
+    color: #8B1A1A;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
   .service-guide-link {
     color: #8B1A1A;
     font-size: 14px;
