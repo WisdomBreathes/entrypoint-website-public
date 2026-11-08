@@ -12,7 +12,11 @@ out/
 # Environment variables
 .env
 .env.*
-!.env.example
+
+# Keep private backend setup and local tooling out of the public site repo.
+/supabase/
+/security/
+/.claude/
 
 # OS files
 .DS_Store
@@ -40,6 +44,8 @@ yarn-error.log*
 
 # Coverage
 coverage
+test-results/
+playwright-report/
 *.lcov
 .nyc_output
 

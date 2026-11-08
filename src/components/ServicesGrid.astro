@@ -1,4 +1,6 @@
 ---
+import HomeSectionIntro from './HomeSectionIntro.astro';
+
 const base = import.meta.env.BASE_URL;
 // ServicesGrid — homepage service index, 5 service entries + 1 CTA
 
@@ -7,49 +9,51 @@ const services = [
     title: 'Permanent residence',
     description: 'Express Entry, Federal Skilled Worker, Canadian Experience Class, and Provincial Nominee Program.',
     label: ['Permanent', 'residence'],
-    href: `${base}services#permanent-residency`,
+    href: `${base}services/#permanent-residency`,
   },
   {
     title: 'Family sponsorship',
     description: 'Spousal sponsorship, open work permits, parents & grandparents, and dependent children.',
     label: ['Sponsor', 'family'],
-    href: `${base}services#family-sponsorship`,
+    href: `${base}services/#family-sponsorship`,
   },
   {
     title: 'Study and work permits',
     description: 'Study permits, post-graduation work permits (PGWP), LMIA, and employer-specific work permits.',
     label: ['Study or', 'work'],
-    href: `${base}services#work-study`,
+    href: `${base}services/#work-study`,
   },
   {
     title: 'Canadian citizenship',
     description: 'Canadian citizenship applications, test preparation, and ceremony guidance.',
     label: ['Citizenship'],
-    href: `${base}services#citizenship`,
+    href: `${base}services/#citizenship`,
   },
   {
     title: 'Refugee and humanitarian matters',
     description: 'Refugee protection claims, protected person applications, and humanitarian and compassionate grounds.',
     label: ['Refugee', 'and H&C'],
-    href: `${base}services#refugee`,
+    href: `${base}services/#refugee`,
   },
 ] as const;
+
+const guides = [
+  { slug: 'oinp', label: 'Ontario Immigrant Nominee Program (OINP)' },
+  { slug: 'pgwp', label: 'Post-graduation work permit (PGWP)' },
+  { slug: 'spousal-sponsorship', label: 'Spousal and dependent child sponsorship' },
+];
 ---
 
 <section style="background: #FAF7F2;" aria-labelledby="services-heading">
 
   <div class="section-container">
 
-    <!-- Section label + heading -->
-    <p style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 8px;">
-      What we do
-    </p>
-    <h2 id="services-heading" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.25; margin-bottom: 8px; max-width: 460px;">
-      Major immigration matters, handled with regulated guidance.
-    </h2>
-    <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #45465E; margin-bottom: 32px; max-width: 480px; line-height: 1.7;">
-      Whether you are applying for the first time or dealing with a more complex file, we help you understand the process, the requirements, and the available options for your situation.
-    </p>
+    <HomeSectionIntro
+      id="services-heading"
+      label="What we do"
+      title="Immigration services for individuals and families"
+      description="Whether you are applying for the first time or facing a more complex matter, we help you understand the requirements and the options available to you."
+    />
 
     <!-- Service index -->
     <div class="home-services-index">
@@ -75,14 +79,14 @@ const services = [
       ))}
 
       <a
-        href={`${base}contact`}
+        href={`${base}contact/`}
         class="home-service-entry home-service-entry-cta"
       >
         <div class="home-service-meta">
           <span class="home-service-number" aria-hidden="true">06</span>
           <span class="home-service-label">
             <span>First</span>
-            <span>conversation</span>
+            <span>review</span>
           </span>
         </div>
 
@@ -93,19 +97,124 @@ const services = [
           </p>
         </div>
 
-        <span class="home-service-link">Schedule a consultation</span>
+        <span class="home-service-link">Book a consultation</span>
       </a>
 
     </div>
+
+    <nav class="home-program-guides" aria-labelledby="home-program-guides-heading">
+      <div class="home-program-guides-header">
+        <h3 id="home-program-guides-heading">Program guides</h3>
+        <p class="home-program-guides-desc">Still researching? Start with <a href={`${base}programs/`}>how to immigrate to Canada</a>.</p>
+      </div>
+      <ul role="list">
+        {guides.map(({ slug, label }) => (
+          <li><a href={`${base}programs/${slug}/`}>{label}</a></li>
+        ))}
+      </ul>
+    </nav>
   </div>
 </section>
 
 <style>
+  .home-program-guides {
+    margin-top: 48px;
+    background: #F4F1EB;
+    border: 1px solid #E0D9CE;
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+  }
+  .home-program-guides-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .home-program-guides h3 {
+    color: #1C2456;
+    font: 600 1.0625rem/1.25 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .home-program-guides-desc {
+    color: #5C5C7A;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  .home-program-guides-desc a {
+    color: #8B1A1A;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .home-program-guides ul {
+    display: grid;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+  }
+  .home-program-guides li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #FFFDFA;
+    border: 1px solid #E8E3D9;
+    border-radius: 8px;
+    color: #1C2456;
+    font-family: Inter, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .home-program-guides li a::after {
+    content: '';
+    flex: none;
+    width: 0.5em;
+    height: 0.5em;
+    border-top: 1.5px solid #8B1A1A;
+    border-right: 1.5px solid #8B1A1A;
+    transform: rotate(45deg);
+    opacity: 0.7;
+  }
+  .home-program-guides li a:hover {
+    background: #ffffff;
+    border-color: #C4973A;
+  }
+  .home-program-guides li a:hover::after { opacity: 1; }
+  @media (min-width: 768px) {
+    .home-program-guides ul {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .home-program-guides li {
+      display: flex;
+    }
+    .home-program-guides li a {
+      flex: 1;
+    }
+    .home-program-guides {
+      padding: 28px 32px 28px;
+    }
+    .home-program-guides-header {
+      margin-bottom: 16px;
+    }
+  }
+  @media (max-width: 767px) {
+    .home-program-guides {
+      padding: 20px 20px 20px;
+      margin-top: 32px;
+    }
+  }
+
   .home-services-index {
     display: grid;
     grid-template-columns: 1fr;
     border: 1px solid #E8E3D9;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     background: rgba(255,255,255,0.36);
   }
@@ -124,12 +233,11 @@ const services = [
     border-bottom: 1px solid #E8E3D9;
     color: inherit;
     text-decoration: none;
-    transition: background 0.18s ease, transform 0.18s ease;
+    transition: background-color 0.18s ease;
   }
 
   .home-service-entry:hover {
     background: #ffffff;
-    transform: translateY(-2px);
   }
 
   .home-service-entry:focus-visible {
@@ -164,7 +272,6 @@ const services = [
     font-size: 10px;
     font-weight: 600;
     line-height: 1.35;
-    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #8B1A1A;
   }
@@ -205,6 +312,9 @@ const services = [
   }
 
   .home-service-link {
+    display: flex;
+    align-items: center;
+    gap: 0.48em;
     grid-column: 2;
     grid-row: 3;
     font-family: 'Inter', sans-serif;
@@ -217,10 +327,9 @@ const services = [
 
   .home-service-link::after {
     content: '';
-    display: inline-block;
+    flex: none;
     width: 0.42em;
     height: 0.42em;
-    margin-left: 0.48em;
     border-top: 1.5px solid currentColor;
     border-right: 1.5px solid currentColor;
     transform: translateY(-0.06em) rotate(45deg);
@@ -313,6 +422,15 @@ const services = [
 
     .home-service-entry:last-child {
       border-bottom: 0;
+    }
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    @media (min-width: 640px) {
+      .home-services-index { grid-auto-rows: auto; }
+      .home-service-entry { grid-row: span 3; grid-template-rows: subgrid; min-height: 0; }
+      .home-service-copy h3 { min-height: 0; margin-bottom: 8px; }
+      .home-service-copy p { min-height: 0; }
     }
   }
 </style>

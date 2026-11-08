@@ -1,0 +1,400 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+
+type TextSection = {
+  title: string;
+  body: string;
+  bullets?: string[];
+};
+
+type PageLink = {
+  label: string;
+  href: string;
+};
+
+interface Props {
+  title: string;
+  description: string;
+  kicker: string;
+  heading: string;
+  summary: string;
+  badges: string[];
+  sections: TextSection[];
+  noteTitle: string;
+  noteBody: string;
+  sourceLinks: PageLink[];
+  relatedLinks: PageLink[];
+  reviewedOn: string;
+  schemaName: string;
+  schemaTopics: string[];
+}
+
+const base = import.meta.env.BASE_URL;
+const {
+  title,
+  description,
+  kicker,
+  heading,
+  summary,
+  badges,
+  sections,
+  noteTitle,
+  noteBody,
+  sourceLinks,
+  relatedLinks,
+  reviewedOn,
+  schemaName,
+  schemaTopics,
+} = Astro.props;
+
+const canonicalPath = Astro.url.pathname;
+const canonicalUrl = new URL(canonicalPath, Astro.site).toString();
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://entrypointcanada.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Programs',
+        item: 'https://entrypointcanada.com/programs/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: schemaName,
+        item: canonicalUrl,
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: schemaName,
+    description,
+    url: canonicalUrl,
+    dateModified: reviewedOn,
+    inLanguage: 'en-CA',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Entrypoint Canada',
+      url: 'https://entrypointcanada.com/',
+    },
+    about: schemaTopics,
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Entrypoint Canada Immigration Services',
+      url: 'https://entrypointcanada.com/',
+      areaServed: [
+        'Cambridge, Ontario',
+        'Kitchener, Ontario',
+        'Waterloo, Ontario',
+        'Regional Municipality of Waterloo',
+        'Ontario',
+        'Canada',
+      ],
+    },
+  },
+];
+---
+
+<Layout title={title} description={description} heroImage="programs" schema={pageSchema}>
+  <Navbar />
+  <main id="main-content">
+    <section style="position: relative; overflow: hidden; background: #1A0A0A; padding: 56px 0 52px; min-height: 360px; display: flex; align-items: center;">
+      <picture>
+        <source
+          type="image/webp"
+          srcset={`${base}images/cole-keister-rydTSO7xB5A-unsplash-800w.webp 800w, ${base}images/cole-keister-rydTSO7xB5A-unsplash-1400w.webp 1400w`}
+          sizes="100vw"
+        />
+        <img
+          src={`${base}images/cole-keister-rydTSO7xB5A-unsplash-1400w.webp`}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          fetchpriority="high"
+          decoding="sync"
+          width="1400"
+          height="2099"
+          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;"
+        />
+      </picture>
+      <div style="position: absolute; inset: 0; background: rgba(10,5,5,0.66);"></div>
+      <div class="page-hero-inner page-hero-copy" style="position: relative; z-index: 1;">
+        <a href={`${base}programs/`} class="page-back-link" style="display: inline-flex; align-items: center; gap: 6px; font-family: Inter, sans-serif; font-size: 13px; color: rgba(255,255,255,0.68); text-decoration: none; margin-bottom: 24px; transition: color 0.15s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to programs
+        </a>
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
+          {kicker}
+        </p>
+        <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 4vw, 46px); font-weight: 700; color: #ffffff; line-height: 1.12; margin-bottom: 18px; max-width: 780px;">
+          {heading}
+        </h1>
+        <p style="font-family: Inter, sans-serif; font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.78); line-height: 1.7; max-width: 650px;">
+          {summary}
+        </p>
+      </div>
+    </section>
+
+    <section style="background: #ffffff; padding: 52px 0;">
+      <div class="section-container program-detail-container">
+        <div class="program-detail-layout">
+          <aside class="program-detail-aside">
+            <div class="program-detail-panel">
+              <p class="program-detail-label">Quick Review</p>
+              <ul class="program-detail-badge-list">
+                {badges.map((badge) => (
+                  <li>{badge}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="program-detail-panel">
+              <p class="program-detail-label">Official Sources</p>
+              <ul class="program-detail-link-list">
+                {sourceLinks.map((link) => (
+                  <li><a href={link.href}>{link.label}</a></li>
+                ))}
+              </ul>
+            </div>
+
+            <p class="program-detail-reviewed">Last reviewed: {reviewedOn}</p>
+          </aside>
+
+          <div class="program-detail-content">
+            {sections.map((section) => (
+              <section class="program-detail-section">
+                <h2>{section.title}</h2>
+                <p>{section.body}</p>
+                {section.bullets && (
+                  <ul>
+                    {section.bullets.map((bullet) => (
+                      <li>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4973A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+
+            <div class="program-detail-note">
+              <strong>{noteTitle}</strong>
+              <p>{noteBody}</p>
+            </div>
+
+            <div class="program-detail-related">
+              <p class="program-detail-label">Related pathways</p>
+              <div>
+                {relatedLinks.map((link) => (
+                  <a href={link.href}>{link.label}</a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: #3D1215; padding: 52px 0;">
+      <div class="section-container" style="text-align: center; padding-top: 0; padding-bottom: 0;">
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 16px;">
+          Cambridge and Kitchener-Waterloo Immigration Help
+        </p>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #ffffff; line-height: 1.2; margin-bottom: 20px; max-width: 640px; margin-left: auto; margin-right: auto;">
+          Review your options with a regulated Canadian immigration consultant.
+        </h2>
+        <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.7; max-width: 560px; margin: 0 auto 30px;">
+          Entrypoint Canada serves clients in Cambridge, Kitchener, Waterloo, and across Ontario with careful eligibility review and application planning.
+        </p>
+        <a href={`${base}contact/`} class="btn-gold" style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+          Book a consultation
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-back-link:hover {
+    color: rgba(255,255,255,0.95);
+  }
+
+  .program-detail-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .program-detail-layout {
+    display: grid;
+    gap: 32px;
+  }
+
+  .program-detail-aside {
+    display: grid;
+    gap: 18px;
+    align-content: start;
+  }
+
+  .program-detail-panel {
+    border: 1px solid #E8E3D9;
+    border-radius: 8px;
+    background: #FAF7F2;
+    padding: 20px;
+  }
+
+  .program-detail-label {
+    font-family: Inter, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1C2456;
+    margin-bottom: 12px;
+  }
+
+  .program-detail-badge-list,
+  .program-detail-link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .program-detail-badge-list li {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #3D3D5C;
+    line-height: 1.55;
+    padding-left: 12px;
+    border-left: 2px solid #C4973A;
+  }
+
+  .program-detail-link-list a,
+  .program-detail-related a {
+    color: #1C2456;
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .program-detail-reviewed {
+    color: #8A8794;
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+  }
+
+  .program-detail-content {
+    display: grid;
+    gap: 28px;
+  }
+
+  .program-detail-section {
+    border-bottom: 1px solid #E8E3D9;
+    padding-bottom: 28px;
+  }
+
+  .program-detail-section h2 {
+    color: #1A1A2E;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight: 700;
+    line-height: 1.22;
+    margin-bottom: 12px;
+  }
+
+  .program-detail-section p,
+  .program-detail-note p {
+    color: #45465E;
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .program-detail-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .program-detail-section li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: #3D3D5C;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .program-detail-section li svg {
+    flex: 0 0 auto;
+    margin-top: 4px;
+  }
+
+  .program-detail-note {
+    border: 1px solid #F0D080;
+    border-radius: 8px;
+    background: #FFFBEB;
+    padding: 18px 20px;
+  }
+
+  .program-detail-note strong {
+    display: block;
+    color: #78350F;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .program-detail-related {
+    padding-top: 6px;
+  }
+
+  .program-detail-related div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+
+  @media (min-width: 900px) {
+    .program-detail-layout {
+      grid-template-columns: minmax(220px, 300px) 1fr;
+      gap: 56px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .program-detail-section p,
+    .program-detail-note p {
+      font-size: 15px;
+      line-height: 1.85;
+    }
+  }
+</style>

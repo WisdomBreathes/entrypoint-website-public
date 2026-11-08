@@ -1,361 +1,251 @@
 ---
+import { homeHero } from '../data/home-hero';
+
 const base = import.meta.env.BASE_URL;
 ---
-<section style="position: relative; padding: 72px 0 64px; overflow: hidden;">
 
-  <!-- Background image — LCP element: WebP with JPEG fallback, eager + fetchpriority=high -->
-  <div style="position: absolute; inset: 0; z-index: 0;">
-    <picture>
-      <source
-        type="image/webp"
-        srcset={`${base}images/ampersand-studios-pp_oXEb2H48-unsplash-800w.webp 800w, ${base}images/ampersand-studios-pp_oXEb2H48-unsplash-1400w.webp 1400w`}
-        sizes="100vw"
-      />
-      <img
-        src={`${base}images/ampersand-studios-pp_oXEb2H48-unsplash-1400w.webp`}
-        loading="eager"
-        fetchpriority="high"
-        decoding="sync"
-        alt=""
-        width="1400"
-        height="2100"
-        style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%;"
-      />
-    </picture>
-    <!-- Burgundy overlay — lets image show through subtly -->
-    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,5,5,0.65) 0%, rgba(10,5,5,0.55) 50%, rgba(10,5,5,0.75) 100%);"></div>
-  </div>
+<section class="home-hero" aria-labelledby="home-heading">
+  <picture class="home-hero-image">
+    <source
+      type="image/webp"
+      media={homeHero.mobile.media}
+      srcset={homeHero.mobile.srcset}
+      sizes="100vw"
+    />
+    <img
+      src={homeHero.wide.src}
+      srcset={homeHero.wide.srcset}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+      alt="Canadian flag flying against a blue sky"
+      width="1920"
+      height="1210"
+    />
+  </picture>
 
-  <!-- Content -->
-  <div class="hero-grid" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 56px; display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center;">
-
-    <!-- Left: Text -->
-    <div>
-      <div class="hero-brand-mark">
-        <span>Entrypoint Canada</span>
-        <strong>Immigration Services</strong>
+  <div class="section-container home-hero-inner">
+    <div class="home-hero-content">
+      <div class="home-hero-brand">
+        <p>Entrypoint Canada</p>
+        <span>Regulated immigration services</span>
       </div>
-
-      <!-- Headline -->
-      <h1 class="hero-h1" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(60px, 5vw, 78px); font-weight: 700; color: #ffffff; line-height: 1.05; margin: 0 0 22px;">
-        Your path<br>to Canada,<br><em style="color: var(--color-hero-gold); font-style: normal;">handled.</em>
-      </h1>
-
-      <!-- Subheadline -->
-      <p style="font-family: Inter, sans-serif; font-size: 17px; color: rgba(255,255,255,0.82); line-height: 1.7; margin: 0 0 36px; font-weight: 300; max-width: 420px;">
-        Professional immigration guidance for applicants who need a clear plan, careful preparation, and regulated representation they can trust.
-      </p>
-
-      <!-- Buttons -->
-      <div class="hero-buttons" style="display: flex; gap: 12px; margin-bottom: 52px; flex-wrap: wrap;">
-        <a href={`${base}contact`} class="btn-gold" style="letter-spacing: 0.01em;">
-          Book a free consultation
-        </a>
-        <a href={`${base}services`} style="display: inline-block; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.88); padding: 14px 24px; border-radius: 7px; font-size: 15px; font-weight: 400; text-decoration: none; font-family: Inter, sans-serif; border: 1px solid rgba(255,255,255,0.25);">
-          Explore services
-        </a>
+      <h1 id="home-heading">A clear next step in Canadian immigration</h1>
+      <p class="home-hero-lead">We assess your options and explain what you need to prepare.</p>
+      <div class="home-hero-actions">
+        <a href={`${base}contact/`} class="btn-gold">Book a consultation</a>
+        <a href="#services-heading" class="home-hero-secondary">Explore services</a>
       </div>
-
-      <!-- Trust facts -->
-      <div class="hero-stats" style="display: flex; gap: 0; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.15); align-items: stretch;">
-        <div class="stat-item hero-stat" style="padding: 0 22px; border-right: 1px solid rgba(255,255,255,0.12); text-align: center;">
-          <div class="hero-stat-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 21px; font-weight: 600; color: #ffffff;">Licensed RCIC<br>in good standing</div>
-          <div class="hero-stat-copy" style="font-family: Inter, sans-serif; font-size: 11px; color: #C4973A; font-weight: 400; margin-top: 4px; letter-spacing: 0.04em;">Authorized by<br>the CICC</div>
-        </div>
-        <div class="stat-item hero-stat" style="padding: 0 22px; border-right: 1px solid rgba(255,255,255,0.12);">
-          <div class="hero-stat-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 21px; font-weight: 600; color: #ffffff;">Across Canada and overseas</div>
-          <div class="hero-stat-copy" style="font-family: Inter, sans-serif; font-size: 11px; color: #C4973A; font-weight: 400; margin-top: 4px; letter-spacing: 0.04em;">Serving clients across multiple pathways</div>
-        </div>
-        <div class="stat-item hero-stat" style="padding: 0 22px;">
-          <div class="hero-stat-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 21px; font-weight: 600; color: #ffffff;">English, Urdu, Bengali, Hindi</div>
-          <div class="hero-stat-copy" style="font-family: Inter, sans-serif; font-size: 11px; color: #C4973A; font-weight: 400; margin-top: 4px; letter-spacing: 0.04em;">Consultations available in multiple languages</div>
-        </div>
-      </div>
+      <p class="home-hero-location">Based in Cambridge, Ontario. Serving Waterloo Region, the GTA, and clients abroad.</p>
     </div>
-
-    <!-- Right: Consultation card -->
-    <div class="hero-card hero-card-reveal" style="background: rgba(250,247,242,0.97); border: 1px solid rgba(232,227,217,0.72); border-radius: 10px; padding: 30px 30px 28px;">
-      <div class="hero-brief-label">Initial consultation brief</div>
-      <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 25px; font-weight: 600; color: var(--color-hero-brown); margin: 0 0 10px; line-height: 1.2;">Start with the facts of your file.</div>
-      <div style="font-family: Inter, sans-serif; font-size: 13px; color: #5E5C6F; font-weight: 300; margin: 0 0 22px; line-height: 1.65;">A focused first review to understand what is possible, what may be risky, and what should happen next.</div>
-
-      <div class="hero-brief-list" aria-label="Initial consultation topics">
-        <div>
-          <span>01</span>
-          <p><strong>Current status</strong> Visitor, student, worker, sponsor, applicant, or refusal history.</p>
-        </div>
-        <div>
-          <span>02</span>
-          <p><strong>Pathway fit</strong> Permanent residence, family sponsorship, permits, citizenship, or humanitarian options.</p>
-        </div>
-        <div>
-          <span>03</span>
-          <p><strong>Next step</strong> Documents, timing, cost expectations, and avoidable gaps.</p>
-        </div>
-      </div>
-
-      <!-- CTA button -->
-      <a href={`${base}contact`} class="btn-burgundy" style="display: block; background: #3D1215; color: #ffffff; padding: 15px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; text-align: center; font-family: Inter, sans-serif; margin-top: 26px; letter-spacing: 0.01em;">
-        Book my free consultation
-      </a>
-    </div>
-
   </div>
 </section>
 
 <style>
-  @keyframes hero-card-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(18px) scale(0.985);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+  .home-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: center;
+    background: #242329;
+    color: #fff;
   }
 
-  .hero-stat {
-    display: flex;
-    flex: 1 1 0;
-    min-height: 88px;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  .home-hero-image,
+  .home-hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
   }
 
-  .hero-stat-title {
-    line-height: 1.25;
+  .home-hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left 44%;
   }
 
-  .hero-brand-mark {
-    display: inline-grid;
-    gap: 7px;
-    margin-bottom: 30px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(196,151,58,0.64);
+  .home-hero::after {
+    content: '';
+    background: linear-gradient(90deg, rgba(13, 28, 34, 0.93), rgba(13, 28, 34, 0.78) 29%, rgba(13, 28, 34, 0.18) 55%, transparent 77%);
   }
 
-  .hero-brand-mark span {
+  .home-hero .home-hero-inner {
+    width: 100%;
+    padding-block: 56px;
+  }
+
+  .home-hero-brand {
+    margin-bottom: 24px;
+  }
+
+  .home-hero-brand p {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(34px, 3.2vw, 46px);
-    font-weight: 700;
-    line-height: 0.95;
-    color: #ffffff;
-    text-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
   }
 
-  .hero-brand-mark strong {
-    font-family: Inter, sans-serif;
+  .home-hero-brand span {
+    display: block;
+    margin-top: 4px;
+    color: #F0D9A8;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.2em;
-    line-height: 1.5;
     text-transform: uppercase;
-    color: #C4973A;
+    letter-spacing: 0.1em;
   }
 
-  .hero-brief-label {
-    font-family: Inter, sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    line-height: 1.4;
-    text-transform: uppercase;
-    color: var(--color-hero-burgundy-dark);
-    margin-bottom: 10px;
-  }
-
-  .hero-brief-list {
-    display: grid;
-    border-top: 1px solid #E8E3D9;
-    border-bottom: 1px solid #E8E3D9;
-  }
-
-  .hero-brief-list div {
-    display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: 14px;
-    padding: 15px 0;
-    border-top: 1px solid #E8E3D9;
-  }
-
-  .hero-brief-list div:first-child {
-    border-top: 0;
-  }
-
-  .hero-brief-list span {
+  .home-hero h1 {
+    max-width: 660px;
+    margin: 0 0 16px;
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #C4973A;
-    line-height: 1.35;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-wrap: balance;
   }
 
-  .hero-brief-list p,
-  .hero-brief-list strong {
-    font-family: Inter, sans-serif;
+  .home-hero-lead {
+    max-width: 560px;
+    color: #F4F1EB;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .home-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .home-hero-actions a {
+    justify-content: center;
+  }
+
+  .home-hero-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.55);
+    text-underline-offset: 0.25em;
+  }
+
+  .home-hero-secondary:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .home-hero-location {
+    max-width: 520px;
+    margin-top: 20px;
+    color: #F4F1EB;
     font-size: 13px;
     line-height: 1.6;
   }
 
-  .hero-brief-list p {
-    color: #45465E;
-    font-weight: 300;
+  @media (min-width: 768px) {
+    .home-hero-content { max-width: 46%; }
+    .home-hero-lead { max-width: 360px; }
+    .home-hero-location { max-width: 390px; text-wrap: pretty; }
   }
 
-  .hero-brief-list strong {
-    color: #1A1A2E;
-    font-weight: 600;
-  }
-
-  .hero-card-reveal {
-    animation: hero-card-reveal 1400ms cubic-bezier(0.22, 1, 0.36, 1) 520ms both,
-               float 6s ease-in-out 2.2s infinite;
-  }
-
-  @media (min-width: 768px) and (max-width: 1366px) {
-    .hero-grid {
-      grid-template-columns: minmax(0, 1fr) 340px !important;
-      gap: 40px !important;
-      padding: 0 36px !important;
-    }
-
-    .hero-grid > div:first-child > p {
-      font-size: 18px !important;
-      line-height: 1.8 !important;
-      max-width: 470px !important;
-    }
-
-    .hero-h1 {
-      font-size: clamp(54px, 5vw, 66px) !important;
-      line-height: 1.06 !important;
-    }
-
-    .hero-brand-mark span {
-      font-size: 38px !important;
-    }
-
-    .hero-buttons {
-      margin-bottom: 40px !important;
-    }
-
-    .hero-stats {
-      padding-top: 22px !important;
-    }
-
-    .hero-stat {
-      min-height: 104px;
-    }
-
-    .hero-stat-title {
-      font-size: 24px !important;
-      line-height: 1.15 !important;
-    }
-
-    .hero-stat-copy {
-      font-size: 13px !important;
-      line-height: 1.6 !important;
+  @media (min-width: 1024px) {
+    .home-hero {
+      min-height: calc(100vh - var(--site-header-height));
+      min-height: calc(100svh - var(--site-header-height));
     }
   }
 
-  @media (max-width: 768px) {
-    /* Section padding */
-    .hero-grid {
-      grid-template-columns: 1fr !important;
-      padding: 0 20px !important;
-      gap: 32px !important;
-    }
+  @media (max-width: 1023px) {
+    .home-hero h1 { font-size: 46px; }
+  }
 
-    /* H1 */
-    .hero-h1 {
-      font-size: 36px !important;
-      margin-bottom: 16px !important;
-    }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .home-hero h1 { font-size: 32px; }
+  }
 
-    .hero-brand-mark {
-      margin-bottom: 20px;
+  @media (width < 768px) {
+    .home-hero {
+      display: block;
+      background: #FFFDFA;
+      color: #1C2456;
     }
-
-    .hero-brand-mark span {
-      font-size: 33px !important;
+    .home-hero-image {
+      position: relative;
+      inset: auto;
+      display: block;
+      aspect-ratio: 2 / 1;
     }
-
-    .hero-brand-mark strong {
-      font-size: 9px;
-      letter-spacing: 0.16em;
+    .home-hero-image img { object-position: center 28%; }
+    /* Bottom fade dissolves the image into the page background — no hard edge */
+    .home-hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, transparent 65%, #FFFDFA 100%),
+        linear-gradient(90deg, rgba(13, 28, 34, 0.45), rgba(13, 28, 34, 0.15) 20%, transparent 40%);
     }
-
-    /* Subheadline */
-    .hero-grid > div:first-child > p {
-      font-size: 16px !important;
-      line-height: 1.75 !important;
-      margin-bottom: 24px !important;
+    .home-hero::after { content: none; }
+    .home-hero .home-hero-inner { padding-block: 32px 40px; }
+    .home-hero-brand { margin-bottom: 16px; }
+    .home-hero-brand p { display: none; }
+    /* Service descriptor as a proper eyebrow — small, uppercase, crimson, tracked */
+    .home-hero-brand span {
+      margin-top: 0;
+      color: #8B1A1A;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.4;
     }
-
-    /* Buttons — stack vertically, full width */
-    .hero-buttons {
-      flex-direction: column !important;
-      gap: 10px !important;
-      margin-bottom: 12px !important;
+    .home-hero h1 {
+      max-width: 520px;
+      margin-bottom: 16px;
+      font-size: 2.125rem;
+      line-height: 1.1;
     }
-    .hero-buttons a {
-      width: 100% !important;
-      text-align: center !important;
-      display: block !important;
+    .home-hero-lead {
+      max-width: 38ch;
+      color: #45465E;
+      font-size: 1rem;
+      line-height: 1.65;
+      text-wrap: pretty;
     }
-
-    /* Trust facts — stack cleanly on mobile */
-    .hero-stats {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 10px !important;
-      padding-top: 0 !important;
-      max-width: 320px;
-      margin: 0 auto;
-      border-top: none !important;
+    .home-hero-actions {
+      align-items: center;
+      gap: 0 24px;
+      margin-top: 24px;
     }
-    .hero-stat {
-      padding: 10px 0 !important;
-      border-right: none !important;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      text-align: center;
-      min-height: auto !important;
+    .home-hero-actions .btn-gold { min-height: 44px; padding: 10px 20px; }
+    .home-hero-secondary {
+      min-height: 44px;
+      padding: 0;
+      color: #8B1A1A;
+      text-decoration-color: rgba(139, 26, 26, 0.45);
     }
-    .hero-stat:last-child {
-      border-bottom: none;
-    }
-    .hero-stat-title {
-      font-size: 20px !important;
-      justify-content: center;
-    }
-    .hero-stat-copy {
-      font-size: 12px !important;
-      line-height: 1.65 !important;
-    }
-
-    /* Card below text on mobile */
-    .hero-grid > div:last-child {
-      order: 1;
-    }
-    .hero-grid > div:first-child {
-      order: 0;
-    }
-
-    .hero-card {
-      padding: 24px 22px !important;
-    }
-
-    .hero-brief-list div {
-      grid-template-columns: 32px minmax(0, 1fr);
-      gap: 10px;
+    .home-hero-location {
+      max-width: 46ch;
+      margin-top: 16px;
+      color: #45465E;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-card-reveal {
-      animation: none !important;
-    }
+  @media (max-width: 480px) {
+    .home-hero-actions { display: grid; justify-items: start; }
+    .home-hero-location { margin-top: 12px; }
   }
 
+  @media (max-width: 419px) {
+    .home-hero h1 { font-size: 2rem; }
+  }
 </style>

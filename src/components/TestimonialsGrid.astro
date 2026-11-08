@@ -1,4 +1,6 @@
 ---
+import HomeSectionIntro from './HomeSectionIntro.astro';
+
 const base = import.meta.env.BASE_URL;
 // TestimonialsGrid — 2-column grid, client quotes, gold stars
 
@@ -57,25 +59,20 @@ const testimonials = [
   <div style="position: relative; z-index: 1;">
   <div class="section-container">
 
-    <p style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 8px;">
-      Client stories
-    </p>
-    <h2 id="testimonials-heading" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.25; margin-bottom: 8px;">
-      Real people. Real results.
-    </h2>
-    <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #45465E; margin-bottom: 32px; max-width: 560px; line-height: 1.75;">
-      Shared with permission from real clients whose matters were approved with the support of Entrypoint Canada Immigration Services.
-    </p>
+    <HomeSectionIntro
+      id="testimonials-heading"
+      title="What clients say about working with us"
+      description="Clients share their experiences with Entrypoint Canada in their own words, with permission."
+    />
 
     <div class="grid-testimonials">
       {testimonials.map((t, index) => (
         <article
           class="testimonial-card"
-          style="background: rgba(244,241,235,0.96); border: 1px solid #E8E3D9; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 16px;"
+          style="background: rgba(244,241,235,0.96); border: 1px solid #E8E3D9; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px;"
         >
-          <div class="testimonial-meta">
-            <span>Client matter {String(index + 1).padStart(2, '0')}</span>
-            <span role="img" aria-label={`${t.stars} out of 5 stars`}>5 star review</span>
+          <div class="testimonial-stars" aria-label={`${t.stars} out of 5 stars`} role="img">
+            {'★'.repeat(t.stars)}
           </div>
 
           <!-- Quote -->
@@ -97,6 +94,16 @@ const testimonials = [
 </section>
 
 <style>
+  .testimonial-card blockquote {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .testimonial-card blockquote footer {
+    margin-top: auto;
+  }
+
   @media (max-width: 768px) {
     .grid-testimonials {
       gap: 14px !important;
@@ -110,25 +117,11 @@ const testimonials = [
     }
   }
 
-  .testimonial-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #E8E3D9;
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    line-height: 1.5;
-    text-transform: uppercase;
-    color: #8B1A1A;
-  }
-
-  .testimonial-meta span:last-child {
-    color: #8A6A26;
-    text-align: right;
+  .testimonial-stars {
+    font-size: 15px;
+    color: #C4973A;
+    letter-spacing: 0.08em;
+    line-height: 1;
   }
 
   @media (max-width: 560px) {

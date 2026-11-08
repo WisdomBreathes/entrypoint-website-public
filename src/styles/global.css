@@ -46,7 +46,7 @@
 
   /* Typography */
   .overline {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-crimson;
+    @apply text-xs font-semibold uppercase tracking-[0.1em] text-crimson;
   }
 
   .hero-h1 {

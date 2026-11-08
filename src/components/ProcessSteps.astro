@@ -1,11 +1,11 @@
 ---
-// ProcessSteps — 4-step horizontal flow with alternating crimson/navy circles and dashed connectors
+import HomeSectionIntro from './HomeSectionIntro.astro';
 
 const steps = [
   {
     number: '1',
     title: 'Initial Consultation',
-    description: 'We review your situation and identify which immigration options may apply.',
+    description: 'We talk through your current status, goals, and deadlines to identify which options may apply.',
     circleColor: '#8B1A1A',
   },
   {
@@ -30,26 +30,24 @@ const steps = [
 ---
 
 <section style="background: #ffffff;" aria-labelledby="process-heading">
-  <div class="section-container" style="padding-top: 96px; padding-bottom: 96px;">
+  <div class="section-container">
 
-    <p style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 8px; text-align: center;">
-      How it works
-    </p>
-    <h2 id="process-heading" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.25; margin-bottom: 40px; text-align: center;">
-      From first review to file follow-up
-    </h2>
-    <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin: 0 auto 40px; max-width: 560px; text-align: center;">
-      Each matter moves through a clear process, with eligibility reviewed early, evidence prepared carefully, and follow-up handled as the file progresses.
-    </p>
+    <HomeSectionIntro
+      id="process-heading"
+      label="Our process"
+      title="From the first conversation to follow-up"
+      description="We assess your options before you commit to a route. If you retain us, we help prepare your application and handle follow-up within the agreed scope."
+      centered
+    />
 
     <!-- Steps: horizontal on desktop, vertical on mobile -->
     <div style="position: relative;">
       <!-- Desktop connector line -->
-      <div style="display: none; position: absolute; top: 20px; left: calc(12.5% + 20px); right: calc(12.5% + 20px); height: 1px; border-top: 1px dashed #D9D2C5; z-index: 0;" aria-hidden="true" class="connector-line"></div>
+      <div style="display: none; position: absolute; top: 24px; left: 12.5%; right: 12.5%; height: 1px; border-top: 1px dashed #D9D2C5;" aria-hidden="true" class="connector-line"></div>
 
       <ol class="grid-steps" role="list">
         {steps.map((step) => (
-          <li class="process-step-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+          <li class="process-step-item">
 
             <!-- Step circle -->
             <div
@@ -78,7 +76,11 @@ const steps = [
 
 <style>
   .process-step-item {
-    justify-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
   }
 
   .process-step-number {
@@ -92,12 +94,11 @@ const steps = [
 
   .process-step-copy {
     display: flex;
-    min-height: 112px;
     flex-direction: column;
     align-items: center;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) {
     .connector-line { display: block !important; }
   }
 
@@ -110,8 +111,12 @@ const steps = [
       line-height: 1.75 !important;
       max-width: 240px !important;
     }
-    .process-step-copy {
-      min-height: auto;
-    }
+  }
+
+  @media (max-width: 639px) {
+    .grid-steps { gap: 24px; }
+    .process-step-item { flex-direction: row; align-items: flex-start; gap: 16px; text-align: left; }
+    .process-step-copy { align-items: flex-start; }
+    .process-step-copy p { max-width: none !important; }
   }
 </style>

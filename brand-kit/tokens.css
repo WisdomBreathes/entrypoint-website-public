@@ -101,28 +101,34 @@
   --text-2xs:  10px;   /* Eyebrow labels */
   --text-xs:   11px;   /* Secondary eyebrows */
   --text-sm:   13px;   /* Fine print, captions */
-  --text-base: 14px;   /* Body text */
-  --text-md:   15px;   /* Body text (larger) */
-  --text-lg:   17px;   /* Lead paragraph */
+  --text-base: 14px;   /* Body text (desktop) */
+  --text-md:   15px;   /* Body text, desktop lead */
+  --text-body-mobile: 16px; /* Body text on mobile — 16px is the floor, never below */
+  --text-lg:   17px;   /* Lead paragraph (desktop) */
   --text-xl:   18px;   /* Small headings / intro */
   --text-2xl:  20px;   /* H3 small */
   --text-3xl:  24px;   /* H2 small / H3 large */
   --text-4xl:  28px;   /* H2 medium */
-  --text-5xl:  32px;   /* H2 large */
-  --text-6xl:  36px;   /* H2 desktop large */
-  --text-hero: 62px;   /* H1 hero (desktop) */
+  --text-5xl:  32px;   /* H2 large / mobile H1 */
+  --text-6xl:  36px;   /* H2 desktop large / mobile H1 max */
+  --text-hero: 60px;   /* H1 hero (desktop) */
 
-  /* Line heights */
-  --leading-tight:   1.1;
-  --leading-snug:    1.2;
-  --leading-normal:  1.4;
-  --leading-relaxed: 1.6;
-  --leading-loose:   1.8;
+  /* Line heights — matched to type scale steps */
+  --leading-display: 1.1;    /* H1 hero (60px+) — optical tightness at large size */
+  --leading-tight:   1.1;    /* Alias for display */
+  --leading-heading: 1.2;    /* H1 inner pages, H2 large (36–52px) */
+  --leading-snug:    1.25;   /* H2 medium (28–36px) */
+  --leading-card:    1.35;   /* H3 card titles, medium-short headings */
+  --leading-normal:  1.5;    /* Captions, fine print, button labels */
+  --leading-body:    1.65;   /* Body text (mobile and desktop) — not 1.6, not 1.7: 1.65 */
+  --leading-relaxed: 1.65;   /* Alias for body */
+  --leading-loose:   1.8;    /* Deprecate: too loose for professional tone */
 
   /* Letter spacing */
-  --tracking-wide:   0.06em;   /* Eyebrow labels */
-  --tracking-wider:  0.08em;   /* Uppercase labels */
-  --tracking-widest: 0.12em;   /* Service card labels */
+  --tracking-eyebrow: 0.1em;   /* All eyebrow labels — canonical, replaces component-level variation */
+  --tracking-wide:    0.06em;  /* Secondary use: badge text, fine labels */
+  --tracking-wider:   0.08em;  /* Deprecated — migrate to --tracking-eyebrow */
+  --tracking-widest:  0.12em;  /* Service card category labels (intentionally wider) */
 
 
   /* ============================================================
@@ -166,10 +172,12 @@
   --padding-card-lg:    32px;
   --padding-section-x:  56px;   /* Desktop container horizontal */
   --padding-section-x-tablet: 36px;
-  --padding-section-x-mobile: 20px;
+  --padding-section-x-mobile: 24px;  /* Updated from 20px — 20px is too tight for professional feel */
   --padding-section-y:  64px;   /* Standard section vertical */
   --padding-section-y-lg: 80px; /* Large sections (programs, services) */
   --padding-section-y-xl: 96px; /* Process section */
+  --padding-section-y-mobile: 56px;  /* Mobile standard — never compress below 48px */
+  --padding-section-y-mobile-lg: 64px; /* Mobile large sections */
   --padding-hero-top:   72px;
 
   --max-width-content:  1200px;
@@ -182,14 +190,13 @@
   /* Border radius */
   --radius-pill:    999px;  /* Fully rounded — badges, tags */
   --radius-circle:  50%;    /* Perfect circles — process step numbers */
-  --radius-xl:      22px;   /* About card */
-  --radius-lg:      20px;   /* Badge pills */
+  --radius-xl:      22px;   /* About consultant card outer */
+  --radius-lg:      20px;   /* Stat cards (inner), eyebrow badge pills */
   --radius-hero-card: 16px; /* Hero consultation card */
-  --radius-md:      12px;   /* Buttons, component rounding */
-  --radius-card:    10px;   /* Standard card (tailwind config) */
-  --radius-sm:      8px;    /* Smaller element rounding */
-  --radius-xs:      7px;    /* Subtle button rounding */
-  --radius-btn:     6px;    /* CTA buttons (tailwind config) */
+  --radius-md:      12px;   /* General components, containers */
+  --radius-card:    12px;   /* Standard cards — updated from 10px */
+  --radius-btn:     8px;    /* ALL buttons — canonical, consolidated from 6px/7px split */
+  --radius-sm:      6px;    /* Skip links, TOC nav items, fine-print elements */
 
   /* Border width */
   --border-width: 1px;

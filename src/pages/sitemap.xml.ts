@@ -1,11 +1,14 @@
 import type { APIRoute } from 'astro';
 
 const routes = [
-  { path: '', lastmod: '2026-06-30', changefreq: 'weekly', priority: '1.0' },
-  { path: 'programs/', lastmod: '2026-06-30', changefreq: 'weekly', priority: '0.9' },
-  { path: 'services/', lastmod: '2026-06-30', changefreq: 'monthly', priority: '0.9' },
-  { path: 'contact/', lastmod: '2026-06-30', changefreq: 'monthly', priority: '0.8' },
-  { path: 'about/', lastmod: '2026-06-30', changefreq: 'monthly', priority: '0.7' },
+  { path: '', lastmod: '2026-11-07', changefreq: 'weekly', priority: '1.0' },
+  { path: 'programs/', lastmod: '2026-11-07', changefreq: 'weekly', priority: '0.9' },
+  { path: 'programs/oinp/', lastmod: '2026-11-07', changefreq: 'weekly', priority: '0.8' },
+  { path: 'programs/pgwp/', lastmod: '2026-11-07', changefreq: 'monthly', priority: '0.8' },
+  { path: 'programs/spousal-sponsorship/', lastmod: '2026-11-07', changefreq: 'monthly', priority: '0.8' },
+  { path: 'services/', lastmod: '2026-11-07', changefreq: 'monthly', priority: '0.9' },
+  { path: 'contact/', lastmod: '2026-11-07', changefreq: 'monthly', priority: '0.8' },
+  { path: 'about/', lastmod: '2026-11-07', changefreq: 'monthly', priority: '0.7' },
   { path: 'privacy/', lastmod: '2026-06-30', changefreq: 'yearly', priority: '0.3' },
   { path: 'terms/', lastmod: '2026-06-30', changefreq: 'yearly', priority: '0.3' },
 ];

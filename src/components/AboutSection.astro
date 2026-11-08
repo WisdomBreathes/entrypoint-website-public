@@ -1,178 +1,82 @@
 ---
+import HomeSectionIntro from './HomeSectionIntro.astro';
+
 const base = import.meta.env.BASE_URL;
-// AboutSection — 2-column: burgundy card with avatar (left) + bio + stat cards (right)
 ---
 
-<section style="position: relative; overflow: hidden; background: #F4F1EB;" aria-labelledby="about-heading">
-
-  <!-- Background image — below the fold, lazy loaded -->
-  <div style="position: absolute; inset: 0; z-index: 0;">
-    <picture>
-      <source
-        type="image/webp"
-        srcset={`${base}images/juan-rojas-M62J7DBZ-hY-unsplash-800w.webp 800w, ${base}images/juan-rojas-M62J7DBZ-hY-unsplash-1400w.webp 1400w`}
-        sizes="100vw"
-      />
+<section class="home-about" aria-labelledby="about-heading">
+  <div class="section-container">
+    <HomeSectionIntro
+      id="about-heading"
+      title="Meet Sabiha Iftakhar, RCIC"
+    />
+    <div class="home-about-grid">
       <img
-        src={`${base}images/juan-rojas-M62J7DBZ-hY-unsplash-1400w.webp`}
+        class="home-consultant-portrait"
+        src={`${base}images/sabiha-iftakhar-portrait.jpg`}
+        alt="Portrait of Sabiha Iftakhar"
+        width="842"
+        height="843"
         loading="lazy"
         decoding="async"
-        alt=""
-        width="1400"
-        height="2099"
-        style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
       />
-    </picture>
-    <div style="position: absolute; inset: 0; background: rgba(250,247,242,0.9);"></div>
-  </div>
-
-  <!-- Content -->
-  <div style="position: relative; z-index: 1;">
-  <div class="section-container">
-
-    <p style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 8px;">
-      About your consultant
-    </p>
-    <h2 id="about-heading" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.25; margin-bottom: 32px; max-width: 420px;">
-      Guided by Sabiha Iftakhar, RCIC.
-    </h2>
-
-    <div class="grid-2col home-about-grid">
-
-      <!-- Left: consultant card -->
-      <div class="about-card home-consultant-card" style="width: 100%; max-width: 360px; margin: 0 auto; background: rgba(255,255,255,0.97); border: 1px solid rgba(28,36,86,0.1); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; align-self: start; box-shadow: 0 20px 44px rgba(61,18,21,0.08);">
-
-        <img
-          src={`${base}images/sabiha-iftakhar-portrait.jpg`}
-          alt="Portrait of Sabiha Iftakhar"
-          width="136"
-          height="136"
-          loading="lazy"
-          decoding="async"
-          style="width: 136px; height: 136px; border-radius: 50%; border: 4px solid #C4973A; display: block; flex-shrink: 0; object-fit: cover; object-position: center top; background: #8B1A1A;"
-        />
-
-        <div>
-          <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 600; color: #1C2456; margin-bottom: 4px;">Sabiha Iftakhar</p>
-          <p style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #8B1A1A; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px;">
-            Registered Canadian Immigration Consultant
-          </p>
-          <p style="font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 400; color: #45465E; margin-bottom: 6px;">
-            Entrypoint Canada Immigration Services
-          </p>
-          <p style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; color: #66687F; margin-bottom: 14px;">
-            Cambridge, Ontario
-          </p>
-
-          <!-- RCIC badge -->
-          <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(196,151,58,0.12); border: 1px solid rgba(196,151,58,0.28); border-radius: 999px; padding: 5px 12px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                 stroke="#C4973A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <polyline points="9 12 11 14 15 10"/>
-            </svg>
-            <span style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #7A5614;">RCIC Member in Good Standing</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: bio + stat cards -->
-      <div class="home-consultant-copy" style="display: flex; flex-direction: column; justify-content: center; gap: 20px;">
-
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75;">
-            Sabiha Iftakhar is a Registered Canadian Immigration Consultant (RCIC) based in Cambridge, Ontario. Through Entrypoint Canada, she works with individuals and families across permanent residence, temporary status, family sponsorship, citizenship, and humanitarian matters.
-          </p>
-          <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75;">
-            Her work is built around careful assessment, realistic advice, and regulated representation within the scope of each retained matter. Clients come to Entrypoint Canada for clear answers, organized filings, and professional guidance they can rely on.
-          </p>
-          <p style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; color: #3D1215; line-height: 1.75;">
-            Want to know more about her background and approach?
-            <a href={`${base}about`} style="color: #8B1A1A; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(139,26,26,0.24); padding-bottom: 1px;">
-              Read Sabiha's full story
-            </a>
-          </p>
-        </div>
-
-        <!-- Trust facts -->
-          <div class="grid-stats">
-            <div class="stat-item about-highlight-card" style="background: rgba(255,255,255,0.96); border: 1px solid rgba(28,36,86,0.08); border-radius: 20px; padding: 18px 18px 20px; text-align: left; box-shadow: 0 14px 32px rgba(61,18,21,0.06);">
-            <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 600; color: #1C2456; line-height: 1.05; margin-bottom: 10px;">Careful file review</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 300; color: #45465E; line-height: 1.65;">Eligibility and evidence assessed before strategy is set</p>
-          </div>
-          <div class="stat-item about-highlight-card" style="background: rgba(255,255,255,0.96); border: 1px solid rgba(28,36,86,0.08); border-radius: 20px; padding: 18px 18px 20px; text-align: left; box-shadow: 0 14px 32px rgba(61,18,21,0.06);">
-            <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 600; color: #1C2456; line-height: 1.05; margin-bottom: 10px;">Direct consultant access</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 300; color: #45465E; line-height: 1.65;">Direct consultant communication throughout the retained work</p>
-          </div>
-          <div class="stat-item about-highlight-card" style="background: rgba(255,255,255,0.96); border: 1px solid rgba(28,36,86,0.08); border-radius: 20px; padding: 18px 18px 20px; text-align: left; box-shadow: 0 14px 32px rgba(61,18,21,0.06);">
-            <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 600; color: #1C2456; line-height: 1.05; margin-bottom: 10px;">Clear expectations</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 300; color: #45465E; line-height: 1.65;">Timelines, risks, and next steps explained upfront</p>
-          </div>
-        </div>
-
+      <div class="home-consultant-copy">
+        <p>Sabiha Iftakhar is a Regulated Canadian Immigration Consultant based in Cambridge, Ontario. She works with individuals and families on permanent residence, temporary status, family sponsorship, citizenship, and humanitarian matters.</p>
+        <p>She reviews the facts of each matter, explains the risks and timelines, and sets out what can be done. Clients who retain Entrypoint Canada work directly with Sabiha throughout their case.</p>
+        <ul class="home-consultant-facts" role="list">
+          <li>Member in good standing with the CICC</li>
+          <li>Consultations in English, Urdu, Bengali, and Hindi</li>
+        </ul>
+        <a href={`${base}about/`}>Read about Sabiha and her credentials</a>
       </div>
     </div>
-  </div>
   </div>
 </section>
 
 <style>
-  @media (min-width: 1024px) {
-    .home-about-grid {
-      align-items: center !important;
-    }
+  .home-about { background: #F4F1EB; }
 
-    .home-consultant-card {
-      align-self: center !important;
-    }
-
-    .home-consultant-copy {
-      justify-content: center;
-      min-height: 100%;
-    }
-
-    .grid-stats {
-      align-items: stretch;
-      gap: 14px;
-    }
-    .about-highlight-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 158px;
-      justify-content: flex-start;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.74), 0 14px 32px rgba(61,18,21,0.06) !important;
-    }
-
-    .about-highlight-card p:first-child {
-      min-height: 63px;
-    }
-
-    .about-highlight-card p:last-child {
-      min-height: 86px;
-    }
+  .home-about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 256px) minmax(0, 560px);
+    align-items: center;
+    gap: 32px;
   }
 
-  @media (max-width: 768px) {
-    /* Trust cards stack on mobile so headings don't break awkwardly */
-    .grid-stats {
-      grid-template-columns: 1fr !important;
-      gap: 10px;
-    }
-    .grid-stats .stat-item {
-      padding: 14px 14px !important;
-    }
-    .grid-stats .stat-item p:first-child {
-      font-size: 21px !important;
-      line-height: 1.15 !important;
-    }
-    .about-highlight-card {
-      min-height: auto;
-      text-align: center !important;
-    }
+  .home-consultant-portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
 
-    .about-highlight-card p:first-child,
-    .about-highlight-card p:last-child {
-      min-height: 0;
-    }
+  .home-consultant-copy {
+    display: grid;
+    gap: 16px;
+    color: #45465E;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .home-consultant-copy a {
+    justify-self: start;
+    color: #8B1A1A;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .home-consultant-facts {
+    display: grid;
+    gap: 4px;
+    padding-top: 12px;
+    border-top: 1px solid #D9D2C5;
+    list-style: none;
+    font-size: 13px;
+  }
+
+  @media (max-width: 639px) {
+    .home-about-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .home-consultant-portrait { max-width: 224px; }
   }
 </style>

@@ -1,4 +1,6 @@
 ---
+import { homeHero } from '../data/home-hero';
+
 const base = import.meta.env.BASE_URL;
 
 interface Props {
@@ -23,14 +25,13 @@ const {
 } = Astro.props;
 
 // Map page → WebP filenames (mobile 800w + desktop 1400w)
-const heroImageMap: Record<string, { m: string; d: string }> = {
-  home:     { m: 'ampersand-studios-pp_oXEb2H48-unsplash-800w.webp',  d: 'ampersand-studios-pp_oXEb2H48-unsplash-1400w.webp' },
+const heroImageMap = {
   about:    { m: 'leonard-laub-X8Dc_8rXZHA-unsplash-800w.webp',       d: 'leonard-laub-X8Dc_8rXZHA-unsplash-1400w.webp' },
   contact:  { m: 'john-lee-oMneOBYhJxY-unsplash-800w.webp',           d: 'john-lee-oMneOBYhJxY-unsplash-1400w.webp' },
   programs: { m: 'cole-keister-rydTSO7xB5A-unsplash-800w.webp',       d: 'cole-keister-rydTSO7xB5A-unsplash-1400w.webp' },
   services: { m: 'ashley-ross-qZEeC8t0UKE-unsplash-800w.webp',        d: 'ashley-ross-qZEeC8t0UKE-unsplash-1400w.webp' },
 };
-const heroPreload = heroImage ? heroImageMap[heroImage] : null;
+const heroPreload = heroImage && heroImage !== 'home' ? heroImageMap[heroImage] : null;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
@@ -59,7 +60,11 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <link rel="preload" href={`${base}fonts/inter-latin.woff2`} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={`${base}fonts/playfair-display-latin.woff2`} as="font" type="font/woff2" crossorigin />
 
-    <!-- Preload the above-the-fold hero image for this page only (mobile-first) -->
+    {heroImage === 'home' && [homeHero.mobile, homeHero.wide].map((crop) => (
+      <link rel="preload" as="image" media={crop.media} imagesrcset={crop.srcset} imagesizes="100vw" fetchpriority="high" />
+    ))}
+
+    <!-- Preload the above-the-fold image on inner pages. -->
     {heroPreload && (
       <>
         <link
@@ -164,6 +169,18 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
         "LMIA Applications",
         "Post-Graduation Work Permits"
       ],
+      "knowsAbout": [
+        "Canadian immigration consultant in Cambridge Ontario",
+        "Immigration consultant in Kitchener-Waterloo",
+        "Express Entry",
+        "Ontario Immigrant Nominee Program",
+        "Post-Graduation Work Permit",
+        "LMIA work permits",
+        "Spousal sponsorship",
+        "Family sponsorship",
+        "Study permits",
+        "Canadian citizenship applications"
+      ],
       "priceRange": "$$",
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
@@ -232,8 +249,23 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html {
+    --site-max-width: 1200px;
+    --site-gutter: 56px;
+    --site-section-space: 64px;
+    --site-nav-height: 64px;
+    --site-header-height: calc(var(--site-nav-height) + 1px);
+    --site-line: #E8E3D9;
+    --site-maroon: #3D1215;
     scroll-behavior: smooth;
     background: #FAF7F2;
+  }
+
+  @media (max-width: 1023px) {
+    html { --site-gutter: 32px; }
+  }
+
+  @media (max-width: 768px) {
+    html { --site-gutter: 24px; --site-section-space: 56px; }
   }
 
   body {
@@ -280,17 +312,13 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     font-size: 15px;
     font-weight: 600;
     padding: 14px 28px;
-    border-radius: 7px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.18s ease;
   }
-  .btn-gold:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 24px rgba(196, 151, 58, 0.35);
-  }
-  .btn-gold:active { transform: scale(0.98); }
+  .btn-gold:hover { background-color: #D4AF62; }
 
   .btn-burgundy {
     display: inline-flex;
@@ -302,18 +330,15 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     font-size: 15px;
     font-weight: 600;
     padding: 14px 24px;
-    border-radius: 7px;
+    border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.15);
     cursor: pointer;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: background-color 0.18s ease;
   }
   .btn-burgundy:hover {
-    transform: translateY(-2px);
     background: #2C0D0F;
-    box-shadow: 0 8px 24px rgba(61, 18, 21, 0.3);
   }
-  .btn-burgundy:active { transform: scale(0.98); }
 
   .btn-crimson {
     display: inline-flex;
@@ -325,17 +350,19 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     font-size: 15px;
     font-weight: 600;
     padding: 14px 24px;
-    border-radius: 7px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
     text-decoration: none;
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: background-color 0.18s ease;
   }
   .btn-crimson:hover {
     background: #A0272A;
-    transform: translateY(-1px);
   }
-  .btn-crimson:active { transform: scale(0.98); }
+
+  :where(.btn-gold, .btn-burgundy, .btn-crimson, .program-inline-link, .page-back-link) > svg {
+    flex: none;
+  }
 
   /* ── Nav links ── */
   .nav-link {
@@ -382,15 +409,6 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     outline-offset: 2px;
   }
 
-  /* ── Testimonial cards ── */
-  .testimonial-card {
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .testimonial-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(61, 18, 21, 0.1);
-  }
-
   /* ── About card ── */
   .about-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -406,40 +424,6 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     cursor: default;
   }
   .stat-item:hover { transform: scale(1.05); }
-
-  /* ── Process circles ── */
-  .process-circle {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .process-circle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 24px rgba(61, 18, 21, 0.25);
-  }
-
-  /* ── Credential dots ── */
-  .cred-dot {
-    display: none;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #C4973A;
-    flex-shrink: 0;
-    margin: 0 16px;
-    animation: pulse-dot 2.5s ease-in-out infinite;
-  }
-  @media (min-width: 640px) {
-    .cred-dot { display: inline-block; }
-  }
-  .cred-dot:nth-child(2) { animation-delay: 0.8s; }
-  .cred-dot:nth-child(4) { animation-delay: 1.6s; }
-
-  /* ── Hero card float ── */
-  /* Float animation is applied via .hero-card-reveal in HeroSection.astro
-     with a 4.6s delay after page load, well past LCP measurement.
-     Do NOT add animation here — it would create a GPU compositing layer at paint time. */
-  .hero-card {
-    will-change: auto;
-  }
 
   /* ── Responsive grids ── */
   .grid-services {
@@ -483,9 +467,6 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     z-index: 10;
   }
   @media (min-width: 640px) {
-    .grid-steps { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1024px) {
     .grid-steps { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
   }
 
@@ -497,40 +478,33 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 
   /* ── Responsive section padding ── */
   .section-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 64px 56px;
-  }
-  @media (max-width: 768px) {
-    .section-container { padding: 44px 20px; }
+    max-width: var(--site-max-width);
+    margin-inline: auto;
+    padding: var(--site-section-space) var(--site-gutter);
   }
 
   /* Inner div for page-level hero sections */
   .page-hero-inner {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
-    padding: 0 56px;
+    padding-inline: var(--site-gutter);
   }
   .page-hero-copy {
     width: min(100%, 720px);
   }
   @media (max-width: 768px) {
-    .page-hero-inner { padding: 0 20px; }
     .page-hero-copy { width: 100%; }
   }
 
   /* Navbar inner */
   .nav-inner {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
-    padding: 0 56px;
+    padding-inline: var(--site-gutter);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
-  }
-  @media (max-width: 768px) {
-    .nav-inner { padding: 0 20px; }
+    height: var(--site-nav-height);
   }
 
   /* ── Flex wrap row centered ── */
@@ -547,11 +521,6 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     0%   { transform: translateY(0px); }
     50%  { transform: translateY(-8px); }
     100% { transform: translateY(0px); }
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.6; transform: scale(0.85); }
   }
 
   @keyframes fadeUp {

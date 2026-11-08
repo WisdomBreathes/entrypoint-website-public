@@ -35,9 +35,24 @@ jobs:
         run: npm ci
 
       - name: Build Astro site
-        run: npm run build
+        run: |
+          node -e '
+            const endpoint = URL.parse(process.env.PUBLIC_INQUIRY_ENDPOINT ?? "");
+            if (!endpoint || endpoint.protocol !== "https:" || endpoint.username ||
+                endpoint.password || endpoint.search || endpoint.hash) {
+              console.error("Set PUBLIC_INQUIRY_ENDPOINT to the public HTTPS inquiry URL without credentials, a query, or a fragment.");
+              process.exit(1);
+            }
+          '
+          npm run build
         env:
           PUBLIC_INQUIRY_ENDPOINT: ${{ vars.PUBLIC_INQUIRY_ENDPOINT }}
+
+      - name: Install layout test browsers
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: Check responsive layouts
+        run: npx playwright test
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

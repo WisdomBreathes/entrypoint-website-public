@@ -44,8 +44,8 @@ export default {
         content: '1200px',
       },
       borderRadius: {
-        card: '10px',
-        btn: '6px',
+        card: '12px',
+        btn: '8px',
       },
     },
   },

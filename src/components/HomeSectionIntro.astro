@@ -1,0 +1,66 @@
+---
+interface Props {
+  id: string;
+  label?: string;
+  title: string;
+  description?: string;
+  centered?: boolean;
+  inverse?: boolean;
+}
+
+const { id, label, title, description, centered = false, inverse = false } = Astro.props;
+---
+
+<div class:list={['home-section-intro', { centered, inverse }]}>
+  {label && <p class="section-label">{label}</p>}
+  <h2 id={id}>{title}</h2>
+  {description && <p class="section-description">{description}</p>}
+</div>
+
+<style>
+  .home-section-intro {
+    max-width: 640px;
+    margin-bottom: 32px;
+  }
+
+  .home-section-intro.centered {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .section-label {
+    margin-bottom: 8px;
+    color: #8B1A1A;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    color: #1C2456;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+    scroll-margin-top: calc(var(--site-header-height) + 16px);
+  }
+
+  .section-description {
+    max-width: 58ch;
+    margin-top: 12px;
+    color: #45465E;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .centered .section-description { margin-inline: auto; }
+  .inverse .section-label { color: #F0D9A8; }
+  .inverse h2 { color: #fff; }
+  .inverse .section-description { color: #F4F1EB; }
+
+  @media (max-width: 768px) {
+    .home-section-intro { margin-bottom: 24px; }
+    h2 { font-size: 28px; }
+  }
+</style>

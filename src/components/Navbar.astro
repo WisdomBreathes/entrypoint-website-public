@@ -1,14 +1,21 @@
 ---
 const base = import.meta.env.BASE_URL;
 const pathFor = (path: string) => `${base}${path}/`.replace(/\/{2,}/g, '/');
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { href: pathFor('services'), label: 'Services', mobileLabel: 'Immigration services' },
+  { href: pathFor('programs'), label: 'Programs', mobileLabel: 'Immigration programs' },
+  { href: pathFor('about'), label: 'About', mobileLabel: 'About the consultant' },
+  { href: pathFor('contact'), label: 'Contact', mobileLabel: 'Contact' },
+];
 ---
 
-<header style="background: #ffffff; border-bottom: 3px solid #3D1215; position: sticky; top: 0; z-index: 50;">
+<header class="site-header">
   <div class="nav-inner">
 
     <!-- Logo -->
-    <a href={base} style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
-      <img src={`${base}logo-icon.svg`} alt="Entrypoint Canada" style="width: 40px; height: 40px; object-fit: contain;" />
+    <a href={base} class="site-wordmark">
+      <img src={`${base}logo-icon.svg`} alt="" width="40" height="40" />
       <div style="display: flex; flex-direction: column; line-height: 1.12; align-items: center;">
         <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 600; color: #1C2456; letter-spacing: 0.01em;">Entrypoint</span>
         <span style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; color: #8B1A1A; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 2px;">Canada</span>
@@ -16,12 +23,15 @@ const pathFor = (path: string) => `${base}${path}/`.replace(/\/{2,}/g, '/');
     </a>
 
     <!-- Desktop nav links (hidden on mobile) -->
-    <nav id="nav-desktop" style="display: flex; align-items: center; gap: 32px;">
-      <a href={pathFor('services')} class="nav-link" data-navpage="services" style="font-family: Inter, sans-serif; font-size: 15px; color: #45465E; text-decoration: none; font-weight: 400;">Services</a>
-      <a href={pathFor('programs')} class="nav-link" data-navpage="programs" style="font-family: Inter, sans-serif; font-size: 15px; color: #45465E; text-decoration: none; font-weight: 400;">Programs</a>
-      <a href={pathFor('about')} class="nav-link" data-navpage="about" style="font-family: Inter, sans-serif; font-size: 15px; color: #45465E; text-decoration: none; font-weight: 400;">About</a>
-      <a href={pathFor('contact')} class="nav-link" data-navpage="contact" style="font-family: Inter, sans-serif; font-size: 15px; color: #45465E; text-decoration: none; font-weight: 400;">Contact</a>
-      <a href={pathFor('contact')} class="btn-gold" style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #1A0F00; background: #C4973A; padding: 9px 20px; border-radius: 7px; text-decoration: none;">
+    <nav id="nav-desktop" aria-label="Main navigation">
+      {navItems.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={['nav-link', { 'nav-page-active': currentPath.startsWith(href) }]}
+          aria-current={currentPath === href ? 'page' : undefined}
+        >{label}</a>
+      ))}
+      <a href={pathFor('contact')} class="btn-gold" style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #1A0F00; background: #C4973A; padding: 9px 20px; border-radius: 8px; text-decoration: none;">
         Book a consultation
       </a>
     </nav>
@@ -29,17 +39,17 @@ const pathFor = (path: string) => `${base}${path}/`.replace(/\/{2,}/g, '/');
     <!-- Hamburger button (hidden on desktop) -->
     <button
       id="hamburger"
-      aria-label="Open navigation menu"
+      type="button"
       aria-expanded="false"
       aria-controls="nav-mobile"
-      style="display: none; background: none; border: none; cursor: pointer; padding: 8px; margin-right: -8px; color: #1A1A2E;"
     >
+      <span>Menu</span>
       <svg id="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <line x1="3" y1="6"  x2="21" y2="6"/>
         <line x1="3" y1="12" x2="21" y2="12"/>
         <line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
-      <svg id="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="display: none;">
+      <svg id="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <line x1="18" y1="6"  x2="6" y2="18"/>
         <line x1="6"  y1="6"  x2="18" y2="18"/>
       </svg>
@@ -48,50 +58,86 @@ const pathFor = (path: string) => `${base}${path}/`.replace(/\/{2,}/g, '/');
   </div>
 
   <!-- Mobile dropdown menu -->
-  <nav
-    id="nav-mobile"
-    aria-label="Mobile navigation"
-    style="display: none; background: #ffffff; border-top: 1px solid #E8E3D9; padding: 8px 0 16px;"
-  >
-    <a href={pathFor('services')}
-       class="mobile-nav-link"
-       style="display: flex; align-items: center; padding: 0 24px; min-height: 48px; font-family: Inter, sans-serif; font-size: 15px; font-weight: 400; color: #1A1A2E; text-decoration: none; border-bottom: 1px solid #F4F1EB; transition: background 0.1s;">
-      Services
-    </a>
-    <a href={pathFor('programs')}
-       class="mobile-nav-link"
-       style="display: flex; align-items: center; padding: 0 24px; min-height: 48px; font-family: Inter, sans-serif; font-size: 15px; font-weight: 400; color: #1A1A2E; text-decoration: none; border-bottom: 1px solid #F4F1EB; transition: background 0.1s;">
-      Programs
-    </a>
-    <a href={pathFor('about')}
-       class="mobile-nav-link"
-       style="display: flex; align-items: center; padding: 0 24px; min-height: 48px; font-family: Inter, sans-serif; font-size: 15px; font-weight: 400; color: #1A1A2E; text-decoration: none; border-bottom: 1px solid #F4F1EB; transition: background 0.1s;">
-      About
-    </a>
-    <a href={pathFor('contact')}
-       class="mobile-nav-link"
-       style="display: flex; align-items: center; padding: 0 24px; min-height: 48px; font-family: Inter, sans-serif; font-size: 15px; font-weight: 400; color: #1A1A2E; text-decoration: none; border-bottom: 1px solid #F4F1EB; transition: background 0.1s;">
-      Contact
-    </a>
-    <div style="padding: 12px 24px 0;">
-      <a href={pathFor('contact')}
-         class="mobile-nav-cta"
-         style="display: flex; align-items: center; justify-content: center; min-height: 48px; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #ffffff; background: #8B1A1A; border-radius: 6px; text-decoration: none; transition: background 0.15s;">
-        Book a consultation
-      </a>
-    </div>
+  <nav id="nav-mobile" aria-label="Mobile navigation" hidden>
+    {navItems.map(({ href, mobileLabel }) => (
+      <a
+        href={href}
+        class:list={['mobile-nav-link', { 'nav-page-active': currentPath.startsWith(href) }]}
+        aria-current={currentPath === href ? 'page' : undefined}
+      >{mobileLabel}</a>
+    ))}
+    <a href={pathFor('contact')} class="btn-gold mobile-nav-cta">Book a consultation</a>
   </nav>
 </header>
 
 <style>
-  @media (min-width: 768px) and (max-width: 1366px) {
-    #nav-desktop {
-      gap: 24px !important;
-    }
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--site-line);
+    background: #FFFDFA;
+  }
 
-    #nav-desktop a[data-navpage] {
-      font-size: 16px !important;
-    }
+  .site-wordmark {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .site-wordmark img { flex: none; object-fit: contain; }
+  #nav-desktop { display: flex; align-items: center; gap: 32px; white-space: nowrap; }
+  #nav-desktop .nav-link { font-size: 15px; font-weight: 400; color: #45465E; }
+  #nav-desktop .nav-page-active, #nav-desktop .nav-link:hover { color: var(--site-maroon); }
+  #nav-desktop .nav-page-active::after { width: 100%; }
+
+  #hamburger {
+    display: none;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    border: 0;
+    background: none;
+    color: #1A1A2E;
+    font: 600 0.875rem/1.2 'Inter', system-ui, sans-serif;
+    cursor: pointer;
+  }
+
+  #hamburger svg { flex: none; }
+  #hamburger[aria-expanded="false"] #icon-close,
+  #hamburger[aria-expanded="true"] #icon-open { display: none; }
+
+  #nav-mobile {
+    max-height: calc(100dvh - var(--site-header-height));
+    padding: 4px var(--site-gutter) 16px;
+    border-top: 1px solid var(--site-line);
+    overflow-y: auto;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-bottom: 1px solid var(--site-line);
+    color: #1A1A2E;
+    font-size: 0.9375rem;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.nav-page-active {
+    color: var(--site-maroon);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .mobile-nav-cta { min-height: 44px; margin-top: 12px; padding: 10px 16px; }
+
+  @media (min-width: 768px) and (max-width: 1366px) {
+    #nav-desktop { gap: 24px; }
+
+    #nav-desktop .nav-link { font-size: 16px; }
 
     #nav-desktop .btn-gold {
       font-size: 15px !important;
@@ -99,70 +145,38 @@ const pathFor = (path: string) => `${base}${path}/`.replace(/\/{2,}/g, '/');
     }
   }
 
-  @media (max-width: 767px) {
-    #nav-desktop  { display: none !important; }
-    #hamburger    { display: flex !important; align-items: center; justify-content: center; }
+  @media (width < 768px) {
+    #nav-desktop { display: none; }
+    #hamburger { display: flex; }
   }
 
-  /* Active page link in desktop nav */
-  a[data-navpage].nav-page-active {
-    color: #3D1215 !important;
-  }
-  a[data-navpage].nav-page-active::after {
-    width: 100% !important;
-  }
-
-  .mobile-nav-link:hover {
-    background: #FAF7F2;
-  }
-
-  .mobile-nav-cta:hover {
-    background: #A0272A !important;
+  @media (min-width: 768px) {
+    #nav-mobile { display: none; }
   }
 </style>
 
 <script>
-  const hamburger  = document.getElementById('hamburger');
-  const navMobile  = document.getElementById('nav-mobile');
-  const iconOpen   = document.getElementById('icon-open');
-  const iconClose  = document.getElementById('icon-close');
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
 
-  function openMenu() {
-    navMobile.style.display  = 'block';
-    iconOpen.style.display   = 'none';
-    iconClose.style.display  = 'block';
-    hamburger.setAttribute('aria-expanded', 'true');
-    hamburger.setAttribute('aria-label', 'Close navigation menu');
+  if (hamburger && navMobile) {
+    const setOpen = (open: boolean) => {
+      navMobile.hidden = !open;
+      hamburger.setAttribute('aria-expanded', String(open));
+    };
+
+    hamburger.addEventListener('click', () => setOpen(navMobile.hidden));
+    navMobile.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !navMobile.hidden) {
+        setOpen(false);
+        hamburger.focus();
+      }
+    });
+    window.matchMedia('(min-width: 768px)').addEventListener('change', ({ matches }) => {
+      if (matches) setOpen(false);
+    });
   }
-
-  function closeMenu() {
-    navMobile.style.display  = 'none';
-    iconOpen.style.display   = 'block';
-    iconClose.style.display  = 'none';
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-label', 'Open navigation menu');
-  }
-
-  const path = window.location.pathname.replace(/\/$/, '');
-  document.querySelectorAll('a[data-navpage]').forEach(link => {
-    const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/$/, '');
-    if (path === linkPath || path.startsWith(linkPath + '/')) {
-      link.classList.add('nav-page-active');
-      link.style.color = '#3D1215';
-    }
-});
-
-  hamburger.addEventListener('click', () => {
-    navMobile.style.display === 'none' ? openMenu() : closeMenu();
-  });
-
-  // Close when any mobile link is clicked
-  navMobile.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Close when viewport widens past mobile breakpoint
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) closeMenu();
-  });
 </script>

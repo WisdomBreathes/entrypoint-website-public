@@ -9,6 +9,7 @@ const services = [
   {
     id: 'permanent-residency',
     title: 'Permanent residence',
+    guide: { path: 'programs/oinp/', label: 'Ontario Immigrant Nominee Program (OINP)' },
     tagline: 'Program eligibility, documents, and timing.',
     description: `Permanent residence applications depend on the program, the applicant's work history, language results, education, family situation, admissibility, and timing. Express Entry, the Provincial Nominee Program, the Atlantic Immigration Program, and other permanent residence pathways each have different requirements.
 
@@ -31,6 +32,7 @@ Key review points include whether the applicant meets the requirements of a curr
   {
     id: 'family-sponsorship',
     title: 'Family sponsorship',
+    guide: { path: 'programs/spousal-sponsorship/', label: 'Spousal, partner, and dependent child sponsorship' },
     tagline: 'Relationship evidence, sponsor eligibility, and complete forms.',
     description: `Family sponsorship allows eligible Canadian citizens and permanent residents to sponsor certain family members to become permanent residents of Canada. The details matter: sponsor eligibility, relationship evidence, dependent children, financial responsibilities, and whether the applicant may be eligible for an open work permit while the application is in process.
 
@@ -53,6 +55,7 @@ The file often turns on the sponsor's eligibility, the principal applicant's adm
   {
     id: 'work-study',
     title: 'Study and work permits',
+    guide: { path: 'programs/pgwp/', label: 'Post-graduation work permit (PGWP) planning' },
     tagline: 'Status, authorization, and permit conditions.',
     description: `A study permit allows many foreign nationals to study at a designated learning institution in Canada. Work permit options may include employer-specific work permits, open work permits in specific situations, post-graduation work permits, and LMIA-supported applications where an employer needs authorization to hire a foreign worker.
 
@@ -120,8 +123,8 @@ Early review points include eligibility, deadlines, the correct forum or applica
 ---
 
 <Layout
-  title="Immigration Services in Cambridge & Kitchener-Waterloo"
-  description="Explore immigration services from Entrypoint Canada, including permanent residence, family sponsorship, study permits, work permits, Canadian citizenship, refugee protection, and humanitarian matters for clients in Cambridge, Kitchener, and Waterloo."
+  title="Canadian Immigration Services | Entrypoint Canada"
+  description="Get regulated advice and application support for Canadian permanent residence, family sponsorship, study and work permits, citizenship, and humanitarian matters."
   heroImage="services"
 >
   <Navbar />
@@ -154,11 +157,11 @@ Early review points include eligibility, deadlines, the correct forum or applica
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           Back to home
         </a>
-        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
           What we offer
         </p>
         <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 4vw, 42px); font-weight: 700; color: #ffffff; line-height: 1.1; margin-bottom: 16px; max-width: 600px;">
-          Every pathway.<br>One trusted consultant.
+          Canadian immigration services
         </h1>
         <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.78); max-width: 520px; line-height: 1.7;">
           Entrypoint Canada advises on the major immigration matters individuals and families face, including permanent residence, family sponsorship, study permits, work permits, Canadian citizenship, refugee protection, and humanitarian applications.
@@ -194,7 +197,7 @@ Early review points include eligibility, deadlines, the correct forum or applica
 
             <!-- Header -->
             <div class="service-section-heading">
-              <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 8px;">
+              <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 8px;">
                 Service {String(i + 1).padStart(2, '0')}
               </p>
               <h2 id={`heading-${service.id}`} style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 6px;">
@@ -215,6 +218,9 @@ Early review points include eligibility, deadlines, the correct forum or applica
                     {para}
                   </p>
                 ))}
+                {service.guide && (
+                  <a class="service-guide-link" href={`${base}${service.guide.path}`}>{service.guide.label}</a>
+                )}
               </div>
 
               <!-- Advisory review grid -->
@@ -277,7 +283,7 @@ Early review points include eligibility, deadlines, the correct forum or applica
     <!-- Bottom CTA -->
     <section style="background: #3D1215; padding: 68px 0;">
       <div class="section-container" style="text-align: center;">
-        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
           Need file-specific guidance?
         </p>
         <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: white; line-height: 1.25; margin-bottom: 12px; max-width: 480px; margin-left: auto; margin-right: auto;">
@@ -287,7 +293,7 @@ Early review points include eligibility, deadlines, the correct forum or applica
           A consultation can review your status, documents, deadlines, and the application category that may apply to your circumstances.
         </p>
         <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px;">
-          <a href={`${base}contact`} class="btn-gold">Request a consultation</a>
+          <a href={`${base}contact/`} class="btn-gold">Request a consultation</a>
           <a href="tel:6479060011" class="btn-crimson">Call 647-906-0011</a>
         </div>
       </div>
@@ -298,6 +304,14 @@ Early review points include eligibility, deadlines, the correct forum or applica
 </Layout>
 
 <style>
+  .service-guide-link {
+    color: #8B1A1A;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
   .service-section-heading {
     display: grid;
     gap: 0;

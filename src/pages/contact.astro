@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
-const inquiryEndpoint = import.meta.env.PUBLIC_INQUIRY_ENDPOINT;
+const inquiryEndpoint = import.meta.env.PUBLIC_INQUIRY_ENDPOINT?.trim();
 
 const services = [
   'Permanent residence',
@@ -20,8 +20,8 @@ const services = [
 ---
 
 <Layout
-  title="Book an Immigration Consultation in Cambridge & Kitchener-Waterloo"
-  description="Book an immigration consultation with Entrypoint Canada. Applicants in Cambridge, Kitchener, Waterloo, and nearby communities can share their situation and receive a professional assessment of the pathways that may apply."
+  title="Book an Immigration Consultation | Entrypoint Canada"
+  description="Request an initial consultation with a regulated Canadian immigration consultant. Entrypoint Canada serves Cambridge, Kitchener-Waterloo, the GTA, and clients abroad."
   heroImage="contact"
 >
   <Navbar />
@@ -54,11 +54,11 @@ const services = [
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           Back to home
         </a>
-        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
           Get in touch
         </p>
         <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 4vw, 42px); font-weight: 700; color: #ffffff; line-height: 1.1; margin-bottom: 16px;">
-          Book your free consultation.
+          Book an immigration consultation
         </h1>
         <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.72); max-width: 520px; line-height: 1.7;">
           Share a few details about your immigration matter so the first conversation can focus on eligibility, documents, timing, and the correct application route.
@@ -80,15 +80,22 @@ const services = [
               Provide a short overview of your situation and we will usually respond within one business day.
             </p>
 
+            {!inquiryEndpoint && (
+              <p class="contact-fallback">The contact form is temporarily unavailable. Please use the <a href="#direct-contact">phone or email options</a>.</p>
+            )}
+            {inquiryEndpoint && (
+              <noscript><p class="contact-fallback">The contact form requires JavaScript. Please use the <a href="#direct-contact">phone or email options</a>.</p></noscript>
+            )}
+
             <form
-              action={`${base}thank-you`}
+              action={`${base}thank-you/`}
               method="POST"
               id="contact-form"
               data-inquiry-endpoint={inquiryEndpoint}
+              hidden
               style="display: flex; flex-direction: column; gap: 20px;"
             >
               <input type="hidden" name="_subject" value="New consultation request — Entrypoint Canada" />
-              <input type="hidden" name="_next" value={`https://entrypointcanada.com${base}thank-you`} />
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" />
 
               <!-- Name + Email -->
@@ -137,7 +144,7 @@ const services = [
                   autocomplete="tel"
                   inputmode="tel"
                   maxlength="20"
-                  pattern="^[0-9+() .-]{7,20}$"
+                  pattern={String.raw`[0-9+\(\) .\-]{7,20}`}
                   placeholder="+1 (___) ___-____"
                   style="font-family: Inter, sans-serif; font-size: 14px; color: #1A1A2E; background: white; border: 1px solid #D9D2C5; border-radius: 8px; padding: 12px 16px; width: 100%; outline: none; transition: border-color 0.15s;"
                   onfocus="this.style.borderColor='#3D1215'" onblur="this.style.borderColor='#D9D2C5'"
@@ -187,17 +194,17 @@ const services = [
                 <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #45465E;">
                   Your information is kept confidential and is not shared without consent except where required by law.
                 </p>
-                <p id="contact-form-error" style="display: none; font-family: Inter, sans-serif; font-size: 12px; font-weight: 500; color: #8B1A1A; line-height: 1.6;"></p>
               </div>
 
               <!-- Submit -->
               <div>
-                <button type="submit" class="btn-burgundy" style="width: 100%; justify-content: center; padding: 14px 24px; font-size: 15px;">
+                <p id="contact-form-error" role="alert" class="contact-fallback"></p>
+                <button type="submit" disabled class="btn-burgundy" style="width: 100%; justify-content: center; padding: 14px 24px; font-size: 15px;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <line x1="22" y1="2" x2="11" y2="13"/>
                     <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                   </svg>
-                  Request consultation
+                  <span data-submit-label>Request consultation</span>
                 </button>
                 <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #45465E; text-align: center; margin-top: 12px;">
                   We usually respond within one business day. Fields marked <span style="color: #8B1A1A;">*</span> are required.
@@ -215,7 +222,7 @@ const services = [
 
             <!-- Direct contact -->
             <div>
-              <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: #1A1A2E; margin-bottom: 24px;">
+              <h2 id="direct-contact" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 2.5vw, 28px); font-weight: 700; color: #1A1A2E; margin-bottom: 24px;">
                 Or reach us directly
               </h2>
 
@@ -295,6 +302,34 @@ const services = [
 </Layout>
 
 <style>
+  #contact-form[hidden] {
+    display: none !important;
+  }
+
+  #direct-contact {
+    scroll-margin-top: 80px;
+  }
+
+  .contact-fallback {
+    font-size: 14px;
+    color: #8B1A1A;
+    line-height: 1.6;
+  }
+
+  .contact-fallback:not(:empty) {
+    margin-bottom: 12px;
+  }
+
+  .contact-fallback a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  #contact-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
   @media (min-width: 900px) {
     .contact-grid {
       grid-template-columns: 1fr 420px !important;
@@ -313,6 +348,11 @@ const services = [
   .contact-direct-card:hover {
     box-shadow: 0 4px 16px rgba(0,0,0,0.07);
   }
+
+  .contact-direct-card > div:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 </style>
 
 <style>
@@ -326,21 +366,30 @@ const services = [
 </style>
 
 <script>
-  const contactForm = document.getElementById('contact-form');
-  const phoneInput = document.getElementById('phone');
-  const messageInput = document.getElementById('message');
+  const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
+  const phoneInput = document.querySelector<HTMLInputElement>('#phone');
+  const messageInput = document.querySelector<HTMLTextAreaElement>('#message');
   const formError = document.getElementById('contact-form-error');
-  const submitButton = contactForm?.querySelector('button[type="submit"]');
+  const submitButton = contactForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const submitLabel = submitButton?.querySelector('[data-submit-label]');
+  const inquiryEndpoint = contactForm?.dataset.inquiryEndpoint;
   const riskyLinkPattern = /(https?:\/\/|www\.|(?:[a-z0-9-]+\.)+(?:com|net|org|io|co|ca|ru|xyz|info|ly)\b|javascript:|<script)/i;
 
-  function showFormError(message) {
+  function showFormError(message: string) {
+    if (!formError) return;
     formError.textContent = message;
-    formError.style.display = 'block';
   }
 
-  function clearFormError() {
-    formError.textContent = '';
-    formError.style.display = 'none';
+  function showDeliveryError() {
+    showFormError('We could not confirm delivery. Your entries are still here. You can ');
+    if (!formError) return;
+    const email = document.createElement('a');
+    email.href = 'mailto:info@entrypointcanada.com';
+    email.textContent = 'email us';
+    const phone = document.createElement('a');
+    phone.href = 'tel:6479060011';
+    phone.textContent = 'call 647-906-0011';
+    formError.append(email, ' or ', phone, '.');
   }
 
   if (phoneInput) {
@@ -349,24 +398,13 @@ const services = [
     });
   }
 
-  if (messageInput) {
-    messageInput.addEventListener('input', clearFormError);
-  }
-
-  function setSubmitting(isSubmitting) {
+  function setSubmitting(isSubmitting: boolean) {
     if (!submitButton) return;
     submitButton.disabled = isSubmitting;
-    submitButton.style.opacity = isSubmitting ? '0.7' : '1';
-    submitButton.style.cursor = isSubmitting ? 'wait' : '';
+    if (submitLabel) submitLabel.textContent = isSubmitting ? 'Sending...' : 'Request consultation';
   }
 
-  async function saveInquiry(form) {
-    const inquiryEndpoint = form.dataset.inquiryEndpoint;
-
-    if (!inquiryEndpoint) {
-      throw new Error('Inquiry endpoint is not configured.');
-    }
-
+  async function saveInquiry(form: HTMLFormElement, endpoint: string) {
     const formData = new FormData(form);
 
     if (formData.get('_gotcha')) {
@@ -385,47 +423,50 @@ const services = [
       user_agent: window.navigator.userAgent,
     };
 
-    const response = await fetch(inquiryEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(inquiry),
-    });
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(inquiry),
+      });
 
-    if (!response.ok) {
-      throw new Error('Unable to save inquiry.');
+      if (!response.ok) {
+        throw new Error('Unable to save inquiry.');
+      }
+    } finally {
+      window.clearTimeout(timeout);
     }
   }
 
-  if (contactForm) {
+  if (contactForm && inquiryEndpoint && submitButton) {
     contactForm.addEventListener('submit', async (event) => {
-      clearFormError();
-
-      if (phoneInput && phoneInput.value && !phoneInput.checkValidity()) {
-        event.preventDefault();
-        showFormError('Please enter a valid phone number using digits and common phone symbols only.');
-        phoneInput.focus();
-        return;
-      }
+      event.preventDefault();
+      if (submitButton.disabled) return;
+      if (formError) formError.textContent = '';
 
       if (messageInput && riskyLinkPattern.test(messageInput.value)) {
-        event.preventDefault();
         showFormError('Please remove links or code-like content from the message and describe your situation in plain text.');
         messageInput.focus();
         return;
       }
 
-      event.preventDefault();
       setSubmitting(true);
 
       try {
-        await saveInquiry(contactForm);
+        await saveInquiry(contactForm, inquiryEndpoint);
         window.location.href = contactForm.action;
-      } catch (error) {
+      } catch {
         setSubmitting(false);
-        showFormError('Something went wrong while sending your message. Please try again or email us directly at info@entrypointcanada.com.');
+        showDeliveryError();
       }
     });
+
+    setSubmitting(false);
+    contactForm.hidden = false;
   }
 </script>

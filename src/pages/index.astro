@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import HeroSection from '../components/HeroSection.astro';
-import CredentialBar from '../components/CredentialBar.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
 import AboutSection from '../components/AboutSection.astro';
@@ -10,23 +9,31 @@ import FaqSection from '../components/FaqSection.astro';
 import TestimonialsGrid from '../components/TestimonialsGrid.astro';
 import CtaSection from '../components/CtaSection.astro';
 import Footer from '../components/Footer.astro';
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Entrypoint Canada',
+  alternateName: 'Entrypoint Canada Immigration Services',
+  url: Astro.site?.href,
+};
 ---
 
 <Layout
-  title="Immigration Consultant in Cambridge & Kitchener-Waterloo | Entrypoint Canada"
-  description="Entrypoint Canada is a regulated immigration practice serving Cambridge, Kitchener, and Waterloo with guidance on Express Entry, family sponsorship, study permits, work permits, Canadian citizenship, refugee protection, and humanitarian matters."
+  title="Entrypoint Canada | Canadian Immigration Consulting"
+  description="Entrypoint Canada is a regulated immigration practice in Cambridge, Ontario, serving Kitchener-Waterloo, the Greater Toronto Area, and clients abroad."
   heroImage="home"
+  schema={websiteSchema}
 >
   <Navbar />
   <main id="main-content">
     <HeroSection />
-    <CredentialBar />
     <ServicesGrid />
     <ProcessSteps />
     <AboutSection />
-    <FaqSection />
     <TestimonialsGrid />
+    <FaqSection />
     <CtaSection />
   </main>
-  <Footer />
+  <Footer homePhotoCredit />
 </Layout>

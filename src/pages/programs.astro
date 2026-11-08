@@ -19,7 +19,7 @@ const programsPageSchema = [
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Canadian Immigration Programs',
+        name: 'How to Immigrate to Canada',
         item: 'https://entrypointcanada.com/programs/',
       },
     ],
@@ -27,10 +27,10 @@ const programsPageSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Canadian Immigration Programs and Special Streams',
+    name: 'How to Immigrate to Canada',
     description: 'Overview of Canadian immigration pathways including Express Entry, Provincial Nominee Program, Ontario Immigrant Nominee Program updates, Canadian Experience Class, post-graduation work permits, LMIA-supported work permits, family sponsorship, and specialist streams.',
     url: 'https://entrypointcanada.com/programs/',
-    dateModified: '2026-06-30',
+    dateModified: '2026-11-07',
     inLanguage: 'en-CA',
     isPartOf: {
       '@type': 'WebSite',
@@ -52,20 +52,21 @@ const programsPageSchema = [
       '@type': 'ItemList',
       name: 'Immigration pathways covered',
       itemListElement: [
-        'Express Entry',
-        'Provincial Nominee Program (PNP)',
-        'Canadian Experience Class and in-Canada applicants',
-        'Ontario Workforce Priority Stream',
-        'Study Permit and Post-Graduation Work Permit',
-        'Employer Work Permits and LMIA Support',
-        'Spousal, Partner, and Child Sponsorship',
-        'C11 Entrepreneur Work Permit',
-        'C16 Francophone Mobility',
-        'C44 Postdoctoral Research',
-      ].map((name, index) => ({
+        { name: 'Express Entry' },
+        { name: 'Provincial Nominee Program (PNP)' },
+        { name: 'Canadian Experience Class and in-Canada applicants' },
+        { name: 'Ontario Workforce Priority Stream', url: 'https://entrypointcanada.com/programs/oinp/' },
+        { name: 'Study Permit and Post-Graduation Work Permit', url: 'https://entrypointcanada.com/programs/pgwp/' },
+        { name: 'Employer Work Permits and LMIA Support' },
+        { name: 'Spousal, Partner, and Child Sponsorship', url: 'https://entrypointcanada.com/programs/spousal-sponsorship/' },
+        { name: 'C11 Entrepreneur Work Permit' },
+        { name: 'C16 Francophone Mobility' },
+        { name: 'C44 Postdoctoral Research' },
+      ].map((item, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        name,
+        name: item.name,
+        ...(item.url ? { url: item.url } : {}),
       })),
     },
   },
@@ -73,8 +74,8 @@ const programsPageSchema = [
 ---
 
 <Layout
-  title="Canadian Immigration Programs: Express Entry, OINP, PGWP & LMIA | Entrypoint Canada"
-  description="Explore Express Entry, PNP, OINP updates, CEC, PGWP, LMIA work permits, family sponsorship, and specialist streams with an RCIC in Cambridge, Ontario."
+  title="How to Immigrate to Canada | Entrypoint Canada"
+  description="Compare Canadian permanent residence pathways, including Express Entry, provincial nomination, and family sponsorship. Learn how study and work permits fit into your plans."
   heroImage="programs"
   schema={programsPageSchema}
 >
@@ -107,15 +108,47 @@ const programsPageSchema = [
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           Back to home
         </a>
-        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 12px;">
           Immigration Programs
         </p>
         <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 4vw, 42px); font-weight: 700; color: #ffffff; line-height: 1.15; margin-bottom: 16px; max-width: 720px;">
-          Canadian Immigration Programs &amp; Special Streams
+          How to immigrate to Canada
         </h1>
         <p style="font-family: Inter, sans-serif; font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 600px;">
-          Review major permanent residence, work permit, and pilot program categories that may apply depending on profile, timing, and current eligibility requirements.
+          Start by deciding whether you want to settle permanently, join family, or come to Canada to study or work. Each goal has different programs and requirements.
         </p>
+      </div>
+    </section>
+
+    <section class="programs-start" aria-labelledby="programs-start-heading">
+      <div class="section-container">
+        <p class="programs-start-eyebrow">Start here</p>
+        <h2 id="programs-start-heading">Which pathway fits your goal?</h2>
+        <p class="programs-start-lead">Start by identifying what you are trying to do. Each goal leads to different programs and timelines.</p>
+
+        <div class="programs-start-grid">
+
+          <div class="programs-start-card">
+            <span class="programs-start-tag">Permanent residence</span>
+            <h3>Settle in Canada</h3>
+            <p>Compare <a href="#economic-pathways">Express Entry and provincial nomination</a>. If your plans are in Ontario, start with the <a href={`${base}programs/oinp/`}>Ontario Immigrant Nominee Program (OINP)</a>.</p>
+          </div>
+
+          <div class="programs-start-card">
+            <span class="programs-start-tag">Family class</span>
+            <h3>Join family in Canada</h3>
+            <p>Read about <a href={`${base}programs/spousal-sponsorship/`}>sponsoring a spouse, partner, or dependent child</a> and the evidence to consider before applying.</p>
+          </div>
+
+          <div class="programs-start-card">
+            <span class="programs-start-tag">Temporary status</span>
+            <h3>Study or work in Canada</h3>
+            <p>Review <a href={`${base}services/#work-study`}>study and work permit options</a> and, for eligible graduates, <a href={`${base}programs/pgwp/`}>post-graduation work permit planning</a>. A temporary permit does not give you permanent residence.</p>
+          </div>
+
+        </div>
+
+        <p class="programs-start-note">Before applying, compare current eligibility and application instructions on <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada.html">Immigration, Refugees and Citizenship Canada's program directory</a>.</p>
       </div>
     </section>
 
@@ -125,7 +158,7 @@ const programsPageSchema = [
 
         <div style="margin-bottom: 32px;">
           <p class="program-section-kicker" style="color: #1C2456;">Core Pathways</p>
-          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
+          <h2 id="economic-pathways" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px; scroll-margin-top: 84px;">
             Express Entry &amp; Provincial Nominee Programs
           </h2>
           <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: #45465E; line-height: 1.7; max-width: 640px;">
@@ -172,7 +205,7 @@ const programsPageSchema = [
               </p>
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
-              <a href={`${base}contact`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 6px; text-decoration: none;">
+              <a href={`${base}contact/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
                 Review this program
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
@@ -216,7 +249,7 @@ const programsPageSchema = [
               </p>
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
-              <a href={`${base}contact`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 6px; text-decoration: none;">
+              <a href={`${base}contact/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
                 Review this program
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
@@ -279,7 +312,7 @@ const programsPageSchema = [
               </div>
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
-              <a href={`${base}contact`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 6px; text-decoration: none;">
+              <a href={`${base}contact/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
                 Review this program
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
@@ -297,7 +330,7 @@ const programsPageSchema = [
                 Ontario Workforce Priority Stream
               </h3>
               <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #45465E; line-height: 1.75; margin-bottom: 24px;">
-                Ontario updated the Ontario Immigrant Nominee Program on June 26, 2026 as part of an OINP redesign. The province says the former eight streams have been removed, the EOI system is closed to new EOIs, and no further invitations will be issued under the former program streams.
+                Ontario replaced eight former Ontario Immigrant Nominee Program streams with the Ontario Workforce Priority stream in June 2026. The new stream has categories for eligible workers with Ontario job offers and for eligible self-employed physicians.
               </p>
               <ul style="list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px;">
                 {[
@@ -314,13 +347,13 @@ const programsPageSchema = [
               </ul>
               <div class="program-card-note" style="background: #ECFDF5; border: 1px solid #6EE7B7; border-radius: 8px; padding: 14px 16px; margin-bottom: 24px;">
                 <p style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 400; color: #065F46; line-height: 1.6; margin: 0;">
-                  <strong>Portal note:</strong> Ontario says the e-Filing Portal is expected to reopen later this summer. Until the new system reopens, OINP eligibility should be checked against the current Ontario page and amended regulations.
+                  <strong>Portal update:</strong> Ontario opened expressions of interest for the new stream on August 4, 2026. Check the <a href="https://www.ontario.ca/page/ontario-workforce-priority-stream" style="color: inherit; text-decoration: underline;">current Ontario stream criteria</a> before registering.
                 </p>
               </div>
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
-              <a href={`${base}contact`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 6px; text-decoration: none;">
-                Review this program
+              <a href={`${base}programs/oinp/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
+                Read the OINP guide
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
@@ -370,8 +403,8 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
-              Review this pathway
+            <a href={`${base}programs/pgwp/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+              Read the PGWP guide
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </article>
@@ -400,7 +433,7 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+            <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
               Review this pathway
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -430,8 +463,8 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
-              Review this pathway
+            <a href={`${base}programs/spousal-sponsorship/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+              Read the sponsorship guide
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </article>
@@ -445,7 +478,7 @@ const programsPageSchema = [
       <div class="section-container">
 
         <div style="margin-bottom: 32px;">
-          <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #1C2456; margin-bottom: 12px;">
+          <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #1C2456; margin-bottom: 12px;">
             Specialist Streams
           </p>
           <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
@@ -482,7 +515,7 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+            <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
               Discuss this route
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -512,7 +545,7 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+            <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
               Discuss this route
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -542,7 +575,7 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+            <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
               Discuss this route
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -578,13 +611,13 @@ const programsPageSchema = [
 
     <!-- Last reviewed timestamp -->
     <div style="max-width: 1200px; margin: 0 auto; padding: 20px 56px 0;">
-      <p style="font-family: Inter, sans-serif; font-size: 11px; font-weight: 300; color: #9C9C9C;">Last reviewed: June 30, 2026</p>
+      <p style="font-family: Inter, sans-serif; font-size: 11px; font-weight: 300; color: #9C9C9C;">Overview reviewed June 30, 2026. OINP information updated November 7, 2026.</p>
     </div>
 
     <!-- Bottom CTA -->
     <section style="background: #3D1215; padding: 52px 0;">
       <div class="section-container" style="text-align: center;">
-        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C4973A; margin-bottom: 16px;">
+        <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C4973A; margin-bottom: 16px;">
           Not Sure Where You Fit?
         </p>
         <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #ffffff; line-height: 1.2; margin-bottom: 20px; max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -594,11 +627,11 @@ const programsPageSchema = [
           A consultation can help determine whether one of these programs or specialist pathways applies to your profile, timing, and long-term immigration plan.
         </p>
         <div style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;">
-          <a href={`${base}contact`} class="btn-gold" style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 14px 28px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+          <a href={`${base}contact/`} class="btn-gold" style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
             Book a consultation
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a href={`${base}services`} class="btn-crimson" style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 500; color: #ffffff; background: #8B1A1A; padding: 14px 28px; border-radius: 6px; text-decoration: none;">
+          <a href={`${base}services/`} class="btn-crimson" style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 500; color: #ffffff; background: #8B1A1A; padding: 14px 28px; border-radius: 8px; text-decoration: none;">
             View all services
           </a>
         </div>
@@ -610,6 +643,106 @@ const programsPageSchema = [
 </Layout>
 
 <style>
+  .programs-start {
+    background: #FAF7F2;
+    padding: 56px 0;
+  }
+
+  .programs-start-eyebrow {
+    font-family: Inter, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8B1A1A;
+    margin: 0 0 12px;
+  }
+
+  .programs-start h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 600;
+    color: #1A1A2E;
+    line-height: 1.2;
+    margin: 0 0 10px;
+  }
+
+  .programs-start-lead {
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #45465E;
+    line-height: 1.65;
+    margin: 0 0 32px;
+    max-width: 56ch;
+  }
+
+  .programs-start-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .programs-start-card {
+    background: #ffffff;
+    border: 1px solid #E8E3D9;
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+
+  .programs-start-tag {
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8B1A1A;
+    margin-bottom: 8px;
+  }
+
+  .programs-start-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1A1A2E;
+    line-height: 1.25;
+    margin: 0 0 8px;
+  }
+
+  .programs-start-card p {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #45465E;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .programs-start-card a,
+  .programs-start-note a {
+    color: #8B1A1A;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .programs-start-note {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #6A6A7E;
+    line-height: 1.65;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .programs-start-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   .page-back-link:hover {
     color: rgba(255,255,255,0.9);
   }
@@ -622,7 +755,7 @@ const programsPageSchema = [
     font-family: Inter, sans-serif;
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 12px;
   }
