@@ -57,7 +57,7 @@ const programsPageSchema = [
         { name: 'Canadian Experience Class' },
         { name: 'Ontario Workforce Priority Stream', url: 'https://entrypointcanada.com/programs/oinp/' },
         { name: 'Study Permit and Post-Graduation Work Permit', url: 'https://entrypointcanada.com/programs/pgwp/' },
-        { name: 'Employer Work Permits and LMIA Support' },
+        { name: 'Employer Work Permits and LMIA Support', url: 'https://entrypointcanada.com/programs/employer-work-permits/' },
         { name: 'Spousal, Partner, and Child Sponsorship', url: 'https://entrypointcanada.com/programs/spousal-sponsorship/' },
         { name: 'C11 Entrepreneur Work Permit' },
         { name: 'C16 Francophone Mobility' },
@@ -83,7 +83,7 @@ const programsPageSchema = [
   <main id="main-content">
 
     <!-- Page hero -->
-    <section style="position: relative; overflow: hidden; background: #1A0A0A; padding: 56px 0 52px; min-height: 360px; display: flex; align-items: center;">
+    <section style="position: relative; overflow: hidden; background: #1A0A0A; padding: 56px 0 52px; min-height: 420px; display: flex; align-items: center;">
       <picture>
         <source
           type="image/webp"
@@ -152,12 +152,12 @@ const programsPageSchema = [
     </section>
 
     <!-- Section 0: Core Pathways — Express Entry & PNP -->
-    <section style="background: #ffffff; padding: 56px 0;">
+    <section id="economic-pathways" class="section-anchor" aria-labelledby="economic-pathways-title" style="background: #ffffff; padding: 56px 0;">
       <div class="section-container">
 
         <div style="margin-bottom: 32px;">
           <p class="program-section-kicker" style="color: #1C2456;">Core Pathways</p>
-          <h2 id="economic-pathways" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px; scroll-margin-top: 84px;">
+          <h2 id="economic-pathways-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 600; color: #1A1A2E; line-height: 1.2; margin-bottom: 12px;">
             Express Entry &amp; Provincial Nominee Programs
           </h2>
           <p style="font-family: Inter, sans-serif; font-size: 16px; font-weight: 300; color: #45465E; line-height: 1.7; max-width: 640px;">
@@ -205,7 +205,7 @@ const programsPageSchema = [
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
               <a href={`${base}contact/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
-                Review this program
+                Book a consultation
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
@@ -249,7 +249,7 @@ const programsPageSchema = [
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
               <a href={`${base}contact/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
-                Review this program
+                Book a consultation
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
@@ -309,7 +309,7 @@ const programsPageSchema = [
             </div>
             <div style="padding: 0 24px 24px; margin-top: auto;">
               <a href={`${base}contact/`} class="btn-gold" style="display: inline-flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; color: #1A1A2E; background: #C4973A; padding: 12px 22px; border-radius: 8px; text-decoration: none;">
-                Review this program
+                Book a consultation
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
@@ -429,8 +429,8 @@ const programsPageSchema = [
                 </li>
               ))}
             </ul>
-            <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
-              Review this pathway
+            <a href={`${base}programs/employer-work-permits/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
+              Read the work permit guide
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </article>
@@ -512,7 +512,7 @@ const programsPageSchema = [
               ))}
             </ul>
             <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
-              Discuss this route
+              Book a consultation
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </article>
@@ -542,7 +542,7 @@ const programsPageSchema = [
               ))}
             </ul>
             <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
-              Discuss this route
+              Book a consultation
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </article>
@@ -572,7 +572,7 @@ const programsPageSchema = [
               ))}
             </ul>
             <a href={`${base}contact/`} class="program-inline-link" style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; color: #1C2456; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #1C2456; padding-bottom: 2px; width: fit-content; transition: opacity 0.15s;">
-              Discuss this route
+              Book a consultation
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </article>

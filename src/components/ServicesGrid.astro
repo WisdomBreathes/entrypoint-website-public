@@ -40,16 +40,17 @@ const services = [
 const guides = [
   { slug: 'oinp', label: 'Ontario Immigrant Nominee Program (OINP)' },
   { slug: 'pgwp', label: 'Post-graduation work permit (PGWP)' },
+  { slug: 'employer-work-permits', label: 'Employer work permits and LMIAs' },
   { slug: 'spousal-sponsorship', label: 'Spousal and dependent child sponsorship' },
 ];
 ---
 
-<section style="background: #FAF7F2;" aria-labelledby="services-heading">
+<section id="services-heading" class="section-anchor" style="background: #FAF7F2;" aria-labelledby="home-services-title">
 
   <div class="section-container">
 
     <HomeSectionIntro
-      id="services-heading"
+      id="home-services-title"
       label="What we do"
       title="Immigration services for individuals and families"
       description="Whether you are applying for the first time or facing a more complex matter, we help you understand the requirements and the options available to you."
@@ -188,7 +189,7 @@ const guides = [
   .home-program-guides li a:hover::after { opacity: 1; }
   @media (min-width: 768px) {
     .home-program-guides ul {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .home-program-guides li {
       display: flex;

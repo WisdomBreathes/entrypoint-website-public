@@ -58,7 +58,7 @@ for (const [width, height] of sizes) {
       const rect = (el: Element) => el.getBoundingClientRect();
       const hero = document.querySelector('.home-hero')!;
       const image = hero.querySelector('img')!;
-      const heading = document.querySelector('#services-heading')!;
+      const heading = document.querySelector('#home-services-title')!;
       const heroHeading = hero.querySelector('h1')!;
       const heroAction = hero.querySelector('.btn-gold')!;
       const heroDescriptor = hero.querySelector('.home-hero-brand span')!;
@@ -87,7 +87,7 @@ for (const [width, height] of sizes) {
         cardProblems,
         sameGutters: Math.abs(frame(hero.querySelector('.section-container')!) - frame(heading.closest('.section-container')!)) < 1,
         heroFillsDesktop: rect(hero).bottom >= innerHeight - 1 && Math.abs(rect(hero).top - nav.bottom - 1) <= 1,
-        directTransition: hero.nextElementSibling?.getAttribute('aria-labelledby') === 'services-heading',
+        directTransition: hero.nextElementSibling?.id === 'services-heading',
         actionVisible: rect(heroAction).bottom <= innerHeight + 1,
         mobilePhotoClear: rect(image).bottom <= rect(heroDescriptor).top && getComputedStyle(hero, '::after').content === 'none',
         mobileDescriptorHierarchy: rect(heroDescriptor).right <= innerWidth + 2
@@ -113,7 +113,7 @@ for (const [width, height] of sizes) {
     expect.soft(home.imageCrop).toMatch(width < 768 ? /-mobile-\d+w\.webp$/ : /-wide-\d+w\.webp$/);
 
     const paths = ['/', '/services/', '/programs/', '/contact/'];
-    if (width === 390 || width === 1440) paths.push('/about/', '/programs/oinp/', '/programs/pgwp/', '/programs/spousal-sponsorship/', '/privacy/', '/terms/');
+    if (width === 390 || width === 1440) paths.push('/about/', '/programs/oinp/', '/programs/pgwp/', '/programs/employer-work-permits/', '/programs/spousal-sponsorship/', '/privacy/', '/terms/');
     for (const path of paths) {
       if (path !== '/') await open(page, path);
       expect.soft(await layoutProblems(page), path).toEqual([]);
@@ -172,6 +172,7 @@ test('homepage links directly to program guides and mobile navigation marks the 
   await expect(guides.getByRole('link', { name: 'how to immigrate to Canada' })).toHaveAttribute('href', '/programs/');
   await expect(guides.getByRole('link', { name: 'Ontario Immigrant Nominee Program (OINP)' })).toHaveAttribute('href', '/programs/oinp/');
   await expect(guides.getByRole('link', { name: 'Post-graduation work permit (PGWP)' })).toHaveAttribute('href', '/programs/pgwp/');
+  await expect(guides.getByRole('link', { name: 'Employer work permits and LMIAs' })).toHaveAttribute('href', '/programs/employer-work-permits/');
   await expect(guides.getByRole('link', { name: 'Spousal and dependent child sponsorship' })).toHaveAttribute('href', '/programs/spousal-sponsorship/');
 
   const toggle = page.getByRole('button', { name: 'Menu', exact: true });
@@ -182,6 +183,28 @@ test('homepage links directly to program guides and mobile navigation marks the 
   await toggle.click();
   await expect(programs).toHaveAttribute('aria-current', 'page');
 });
+
+for (const [width, height] of [[390, 844], [1440, 900]]) {
+  test(`section jump links land below the sticky header at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    for (const [path, link, anchor, eyebrow] of [
+      ['/', 'Explore services', '#services-heading', 'What we do'],
+      ['/programs/', 'Express Entry and provincial nomination', '#economic-pathways', 'Core Pathways'],
+    ]) {
+      await test.step(path, async () => {
+        await open(page, path);
+        await page.getByRole('link', { name: link, exact: true }).click();
+        await expect(page).toHaveURL(path + anchor);
+        const section = page.locator(anchor);
+        await expect.poll(() => section.evaluate((el) => {
+          const headerBottom = document.querySelector('.site-header')!.getBoundingClientRect().bottom;
+          return Math.abs(el.getBoundingClientRect().top - headerBottom);
+        })).toBeLessThanOrEqual(2);
+        await expect(section.getByText(eyebrow, { exact: true })).toBeInViewport({ ratio: 1 });
+      });
+    }
+  });
+}
 
 for (const [width, height, deviceScaleFactor, budget, candidate] of [
   [390, 844, 2, 30_000, 840], [390, 844, 3, 42_000, 1080],

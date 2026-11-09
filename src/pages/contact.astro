@@ -187,12 +187,13 @@ const services = [
                   required
                   rows="5"
                   maxlength="2000"
-                  placeholder="Tell us briefly about your situation, including your current status in Canada if applicable, important deadlines, previous refusals, and what you are hoping to apply for."
+                  aria-describedby="inquiry-privacy-note"
+                  placeholder="Briefly describe what you need help with and mention any upcoming deadline."
                   style="font-family: Inter, sans-serif; font-size: 14px; color: #1A1A2E; background: white; border: 1px solid #D9D2C5; border-radius: 8px; padding: 12px 16px; width: 100%; outline: none; resize: vertical; line-height: 1.6; transition: border-color 0.15s;"
                   onfocus="this.style.borderColor='#3D1215'" onblur="this.style.borderColor='#D9D2C5'"
                 ></textarea>
-                <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #45465E;">
-                  Your information is kept confidential and is not shared without consent except where required by law.
+                <p id="inquiry-privacy-note" style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 400; color: #45465E; line-height: 1.65;">
+                  We use this information to respond to your inquiry. Please leave out passport numbers and other government identifiers. Read our <a class="contact-policy-link" href={`${base}privacy/`}>Privacy Policy</a>.
                 </p>
               </div>
 
@@ -207,10 +208,10 @@ const services = [
                   <span data-submit-label>Request consultation</span>
                 </button>
                 <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #45465E; text-align: center; margin-top: 12px;">
-                  We usually respond within one business day. Fields marked <span style="color: #8B1A1A;">*</span> are required.
+                  Fields marked <span style="color: #8B1A1A;">*</span> are required.
                 </p>
-                <p style="font-family: Inter, sans-serif; font-size: 11px; font-weight: 300; color: #9C9C9C; text-align: center; margin-top: 10px; line-height: 1.65;">
-                  Submission of this form does not create a consultant-client relationship. Representation begins only after a signed retainer agreement. This form is securely processed.
+                <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 400; color: #45465E; text-align: center; margin-top: 10px; line-height: 1.65;">
+                  Sending an inquiry does not book a consultation or start representation. See our <a class="contact-policy-link" href={`${base}terms/#consultant-client`}>Terms of Use</a>.
                 </p>
               </div>
 
@@ -228,7 +229,7 @@ const services = [
 
               <div style="display: flex; flex-direction: column; gap: 20px;">
 
-                <a href="tel:6479060011" class="contact-direct-card" style="display: flex; align-items: flex-start; gap: 16px; background: white; border: 1px solid #E8E3D9; border-radius: 10px; padding: 20px 24px; text-decoration: none; transition: box-shadow 0.15s;">
+                <a href="tel:+16479060011" class="contact-direct-card" style="display: flex; align-items: flex-start; gap: 16px; background: white; border: 1px solid #E8E3D9; border-radius: 10px; padding: 20px 24px; text-decoration: none; transition: box-shadow 0.15s;">
                   <div style="width: 40px; height: 40px; border-radius: 8px; background: #3D1215; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.94-1.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 15z"/></svg>
                   </div>
@@ -273,8 +274,8 @@ const services = [
                 {[
                   { step: '01', text: 'You share the application type, current status, deadlines, and any refusal or removal history.' },
                   { step: '02', text: 'We review whether the matter fits the services offered and what documents may be needed.' },
-                  { step: '03', text: 'The consultation focuses on eligibility, risk areas, and the realistic next step.' },
-                  { step: '04', text: 'Formal representation begins only after scope, fees, and a retainer agreement are confirmed.' },
+                  { step: '03', text: 'We agree to the scope and any fee in writing before the consultation.' },
+                  { step: '04', text: 'If you choose to proceed, we confirm scope and fees in a separate written service agreement.' },
                 ].map((item) => (
                   <div style="display: flex; align-items: flex-start; gap: 14px;">
                     <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: rgba(196,151,58,0.5); line-height: 1; flex-shrink: 0; width: 28px;">{item.step}</span>
@@ -288,7 +289,7 @@ const services = [
             <div id="privacy" style="background: #F4F1EB; border: 1px solid #E8E3D9; border-radius: 10px; padding: 20px 24px;">
               <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 600; color: #1A1A2E; margin-bottom: 6px;">Privacy & Confidentiality</p>
               <p style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 300; color: #45465E; line-height: 1.65;">
-                All information you share with us is kept confidential. As a regulated immigration practice, we operate under professional confidentiality obligations. Your information is not sold or disclosed to third parties without your consent except where required by law.
+                We handle inquiries under our <a class="contact-policy-link" href={`${base}privacy/`}>Privacy Policy</a>. It explains what we collect, how we use it, and how to contact us about your information.
               </p>
             </div>
 
@@ -302,6 +303,13 @@ const services = [
 </Layout>
 
 <style>
+  .contact-policy-link {
+    color: #3D1215;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
   #contact-form[hidden] {
     display: none !important;
   }
@@ -387,7 +395,7 @@ const services = [
     email.href = 'mailto:info@entrypointcanada.com';
     email.textContent = 'email us';
     const phone = document.createElement('a');
-    phone.href = 'tel:6479060011';
+    phone.href = 'tel:+16479060011';
     phone.textContent = 'call 647-906-0011';
     formError.append(email, ' or ', phone, '.');
   }
@@ -419,7 +427,7 @@ const services = [
       message: String(formData.get('message') || '').trim(),
       form_subject: String(formData.get('_subject') || '').trim(),
       source: 'website_contact_form',
-      page_url: window.location.href,
+      page_url: window.location.origin + window.location.pathname,
       user_agent: window.navigator.userAgent,
     };
 

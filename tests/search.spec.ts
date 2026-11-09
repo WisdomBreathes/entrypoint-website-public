@@ -7,6 +7,7 @@ const publicPaths = [
   '/programs/',
   '/programs/oinp/',
   '/programs/pgwp/',
+  '/programs/employer-work-permits/',
   '/programs/spousal-sponsorship/',
   '/about/',
   '/contact/',
@@ -56,6 +57,60 @@ test('confirmation and error pages are excluded from indexing', async ({ page })
   for (const path of ['/thank-you/', '/404.html']) {
     await page.goto(path);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /\bnoindex\b/i);
+  }
+});
+
+test('site links resolve to existing pages and section anchors', async ({ page }) => {
+  const paths = [...publicPaths, '/thank-you/', '/404.html'];
+  const anchorsByPath = new Map<string, Set<string>>();
+  const linksByPath = new Map<string, string[]>();
+  for (const path of paths) {
+    const response = await page.goto(path);
+    if (path !== '/404.html') expect(response?.status(), path).toBe(200);
+    const { anchors, links } = await page.evaluate(() => ({
+      anchors: [...document.querySelectorAll('[id]')].map((el) => el.id),
+      links: [...new Set([...document.querySelectorAll<HTMLAnchorElement>('a[href]')].map((el) => el.href))],
+    }));
+    anchorsByPath.set(path, new Set(anchors));
+    linksByPath.set(path, links);
+  }
+
+  const previewOrigin = new URL(page.url()).origin;
+  for (const [path, links] of linksByPath) {
+    for (const href of links) {
+      const url = new URL(href);
+      if (url.protocol === 'tel:') expect(url.href, path).toBe('tel:+16479060011');
+      if (url.protocol === 'mailto:') expect(url.href, path).toBe('mailto:info@entrypointcanada.com');
+      if (url.origin !== previewOrigin && url.origin !== site) continue;
+      const anchors = anchorsByPath.get(url.pathname);
+      expect(anchors, `${path} links to ${href}`).toBeDefined();
+      if (url.hash) expect(anchors?.has(decodeURIComponent(url.hash.slice(1))), `${path} links to ${href}`).toBe(true);
+    }
+  }
+});
+
+test('program cards distinguish guides from consultations', async ({ page }) => {
+  const guides = [
+    { link: 'Read the OINP guide', path: '/programs/oinp/', heading: 'Ontario Immigrant Nominee Program (OINP)' },
+    { link: 'Read the PGWP guide', path: '/programs/pgwp/', heading: 'Post-Graduation Work Permit (PGWP)' },
+    { link: 'Read the work permit guide', path: '/programs/employer-work-permits/', heading: 'Employer Work Permits and LMIAs' },
+    { link: 'Read the sponsorship guide', path: '/programs/spousal-sponsorship/', heading: 'Spousal, Partner, and Dependent Child Sponsorship' },
+  ];
+  await page.goto('/programs/');
+  const cards = page.locator('.program-card');
+  const consultationLinks = cards.getByRole('link', { name: 'Book a consultation', exact: true });
+  await expect(cards.locator('.btn-gold, .program-inline-link')).toHaveCount(10);
+  await expect(consultationLinks).toHaveCount(6);
+  expect(await consultationLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href'))))
+    .toEqual(Array(6).fill('/contact/'));
+
+  for (const { link, path, heading } of guides) {
+    await test.step(link, async () => {
+      await cards.getByRole('link', { name: link, exact: true }).click();
+      await expect(page).toHaveURL(path);
+      await expect(page.getByRole('heading', { level: 1, name: heading, exact: true })).toBeVisible();
+      await page.goto('/programs/');
+    });
   }
 });
 

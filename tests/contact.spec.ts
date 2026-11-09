@@ -1,12 +1,13 @@
 import { expect, test } from '@playwright/test';
 
 test('contact page handles the local fallback and configured inquiry delivery', async ({ page }) => {
-  await page.goto('/contact/');
+  await page.goto('/contact/?test=do-not-send#contact-heading');
   const form = page.locator('#contact-form');
   const endpoint = await form.getAttribute('data-inquiry-endpoint');
 
   if (!endpoint) {
     await expect(form).toBeHidden();
+    await expect(page.locator('#privacy').getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy/');
     await page.getByRole('link', { name: 'phone or email options' }).click();
     await expect(page).toHaveURL(/#direct-contact$/);
     return;
@@ -31,6 +32,8 @@ test('contact page handles the local fallback and configured inquiry delivery', 
   });
 
   await expect(form).toBeVisible();
+  await expect(form.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy/');
+  await expect(form.getByRole('link', { name: 'Terms of Use' })).toHaveAttribute('href', '/terms/#consultant-client');
   await form.locator('[name="full_name"]').fill('Synthetic Browser Test');
   await form.locator('[name="email"]').fill('browser-test@example.com');
   await form.locator('[name="service"]').selectOption({ index: 1 });
@@ -47,6 +50,7 @@ test('contact page handles the local fallback and configured inquiry delivery', 
   await submit.click();
   await expect(feedback).toContainText('We could not confirm delivery');
   await expect(feedback.getByRole('link', { name: 'email us' })).toBeVisible();
+  await expect(feedback.getByRole('link', { name: 'call 647-906-0011' })).toHaveAttribute('href', 'tel:+16479060011');
   await expect(message).toHaveValue(testMessage);
   await expect(submit).toBeEnabled();
   expect(requests).toHaveLength(1);
@@ -55,6 +59,7 @@ test('contact page handles the local fallback and configured inquiry delivery', 
     email: 'browser-test@example.com',
     phone: null,
     message: testMessage,
+    page_url: new URL('/contact/', page.url()).href,
   });
 
   status = 200;

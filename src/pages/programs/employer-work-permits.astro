@@ -1,0 +1,57 @@
+---
+import ProgramDetailPage from '../../components/ProgramDetailPage.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<ProgramDetailPage
+  title="Employer Work Permits and LMIAs | Entrypoint Canada"
+  description="Find out when a Canadian employer needs a Labour Market Impact Assessment (LMIA), what an exemption means, and what the worker needs to apply."
+  kicker="Working in Canada"
+  heading="Employer Work Permits and LMIAs"
+  summary="If you have a job offer in Canada, find out what your employer needs to do before you apply for a work permit. Some jobs require a Labour Market Impact Assessment (LMIA); others qualify for an exemption."
+  badges={[
+    'The employer applies for an LMIA when one is needed',
+    'The worker applies for the work permit',
+    'A positive LMIA does not authorize you to work',
+  ]}
+  sections={[
+    {
+      title: 'When the employer needs an LMIA',
+      body: 'The employer applies to Employment and Social Development Canada. The assessment looks at whether the employer needs to hire a foreign worker for the job. If the LMIA is positive, the employer gives the worker the details needed for their separate work permit application.',
+      bullets: [
+        'Check the rules for the job, wage and work location before applying',
+        'Keep records of recruitment efforts where the stream requires them',
+        'Do not charge the worker for the LMIA or recover recruitment fees from them',
+      ],
+    },
+    {
+      title: 'When the job is LMIA-exempt',
+      body: 'An exemption applies only when the job and worker meet the requirements for a specific category. In most cases, the employer submits the offer through the IRCC Employer Portal, pays the compliance fee if required, and gives the worker the offer of employment number.',
+    },
+    {
+      title: 'What the worker needs to check',
+      body: 'Check where you are eligible to apply and what documents IRCC requires. An employer-specific permit sets conditions on your work, including who you can work for. If you plan to change employers, check whether you need a new permit before starting the new job.',
+    },
+  ]}
+  noteTitle="Express Entry has separate rules"
+  noteBody="Since November 3, 2026, Express Entry no longer requires an LMIA for a job offer to qualify. That change does not remove the LMIA requirement for a job that still needs one for a work permit."
+  sourceLinks={[
+    { label: 'IRCC employer-specific work permits', href: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/employer-specific.html' },
+    { label: 'ESDC Temporary Foreign Worker Program', href: 'https://www.canada.ca/en/employment-social-development/services/foreign-workers.html' },
+    { label: 'IRCC Employer Portal instructions', href: 'https://www.canada.ca/en/immigration-refugees-citizenship/corporate/partners-service-providers/employer-portal/user-guide.html' },
+    { label: 'IRCC Express Entry job offer rules', href: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/job-offer.html' },
+  ]}
+  relatedLinks={[
+    { label: 'Programs overview', href: `${base}programs/` },
+    { label: 'Study and work permit services', href: `${base}services/#work-study` },
+  ]}
+  reviewedOn="2026-11-08"
+  schemaName="Employer Work Permits and LMIAs"
+  schemaTopics={[
+    'Employer-specific work permits',
+    'Labour Market Impact Assessment',
+    'Temporary Foreign Worker Program',
+    'International Mobility Program',
+  ]}
+/>

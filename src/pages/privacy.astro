@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
+const privacyEmail = { label: 'Email our office about privacy', href: 'mailto:info@entrypointcanada.com' };
+const privacyPhone = { label: 'Call 647-906-0011', href: 'tel:+16479060011' };
 
 const sections = [
   {
@@ -16,25 +18,23 @@ Our contact details are:
 • Business name: Entrypoint Canada Immigration Services
 • Consultant: Sabiha Iftakhar, RCIC
 • Address: 37 Faith St, Cambridge, ON
-• Email: info@entrypointcanada.com
-• Phone: 647-906-0011
 
 This privacy policy applies to all personal information collected through our website (entrypointcanada.com) and through direct communications with our office.`,
+    links: [privacyEmail, privacyPhone],
   },
   {
     id: 'information-collected',
     title: '2. What information we collect',
-    content: `We collect personal information only when you voluntarily provide it to us. This may include:
+    content: `The website contact form collects the details you enter:
 
 • Your full name
 • Your email address
-• Your phone number
-• Details about your immigration situation, goals, or history that you share in your message or during a consultation
-• Country of origin, current immigration status, or other details relevant to assessing your case
+• Your phone number, if you choose to provide it
+• The service you select and the details you include in your message
 
-We do not collect any information automatically beyond standard server logs (such as your IP address and browser type), which are retained only for security and technical maintenance purposes and are not used to identify you personally.
+The form also sends the contact page address and browser information when you submit it. Website and form providers may record technical data, such as an IP address, to operate and secure their services.
 
-Contact form submissions may be processed through secure third-party service providers that handle submitted information on our behalf. We use these providers solely to receive, store, and manage incoming consultation inquiries.`,
+If you contact our office directly or attend a consultation, we may receive other details you choose to share. Please do not send passport numbers, government identifiers, or documents through the website form.`,
   },
   {
     id: 'how-we-use',
@@ -57,20 +57,21 @@ We do not use your information for marketing purposes, and we do not send unsoli
 Specific protections include:
 
 • Your information is not sold to third parties
-• Your information is not shared with third parties without your express written consent, except where required by law
+• We store and process inquiry and client records in Canada
+• Service providers may process information on our behalf to host the website or deliver inquiries
+• Other disclosures are limited to those you authorize or those permitted or required by law and our professional obligations
 • Consultations and file materials are handled in a secure, private environment
 • Electronic communications and stored files are protected with appropriate security measures
 
-If you have concerns about how your information is being handled, please contact us directly at info@entrypointcanada.com.`,
+If you have concerns about how your information is handled, contact our office.`,
+    links: [privacyEmail],
   },
   {
     id: 'data-retention',
     title: '5. Data retention',
-    content: `We retain your personal information only for as long as is necessary to fulfill the purpose for which it was collected or as required by our professional regulatory obligations.
+    content: `We keep website inquiries while we respond and follow up. If an inquiry does not lead to a consultation or other services, we close it and securely delete the inquiry record and related copies we control when they are no longer needed, unless we are required to keep them.
 
-• Inquiry-only contacts (no ongoing consultation): information is retained for a reasonable period to allow for follow-up, then securely deleted or destroyed
-• Active consultation clients: information is retained for the duration of the consultation relationship and for a period thereafter as required under CICC regulations
-• Completed files: retained for the minimum period required by applicable professional standards and applicable law
+If you go ahead with a consultation or engage us for other services, we keep the information needed for that work. We handle those records separately and retain them as required by law and professional obligations.
 
 You may request deletion of your information at any time (see Section 6 below), subject to any overriding legal or regulatory retention requirements.`,
   },
@@ -81,21 +82,21 @@ You may request deletion of your information at any time (see Section 6 below), 
 
 • Right of access — you may request a copy of the personal information we hold about you
 • Right of correction — you may ask us to correct any inaccurate or incomplete information
-• Right of deletion — you may request that we delete your personal information, subject to any legal or regulatory retention obligations
-• Right to withdraw consent — where our use of your information is based on your consent, you may withdraw that consent at any time
+• Deletion requests — you may ask us to delete your information, subject to legal and regulatory retention obligations
+• Withdrawal of consent — you may ask to withdraw consent, subject to legal or contractual restrictions and reasonable notice
 
-To exercise any of these rights, please contact us in writing at info@entrypointcanada.com. We will respond to your request within a reasonable timeframe and in accordance with applicable Canadian privacy legislation, including the Personal Information Protection and Electronic Documents Act (PIPEDA).`,
+Please contact us in writing to make a request. We respond in accordance with applicable Canadian privacy law, including the Personal Information Protection and Electronic Documents Act (PIPEDA).`,
+    links: [privacyEmail],
   },
   {
     id: 'contact-privacy',
     title: '7. Privacy inquiries and complaints',
-    content: `If you have any questions, concerns, or complaints about how we handle your personal information, please contact us:
-
-• Email: info@entrypointcanada.com
-• Phone: 647-906-0011
-• Mail: Sabiha Iftakhar, RCIC — 37 Faith St, Cambridge, ON
-
-We take all privacy concerns seriously and will respond promptly. If you are not satisfied with our response, you have the right to contact the Office of the Privacy Commissioner of Canada at www.priv.gc.ca.`,
+    content: `Contact our office if you have a question or complaint about how we handle personal information. You can also write to Sabiha Iftakhar, RCIC, at 37 Faith St, Cambridge, ON. If you are not satisfied with our response, you can contact the Office of the Privacy Commissioner of Canada.`,
+    links: [
+      privacyEmail,
+      privacyPhone,
+      { label: 'Office of the Privacy Commissioner of Canada', href: 'https://www.priv.gc.ca/en/report-a-concern/' },
+    ],
   },
 ];
 ---
@@ -124,7 +125,7 @@ We take all privacy concerns seriously and will respond promptly. If you are not
           How personal information is collected, used, stored, and protected through this website and during consultations.
         </p>
         <p style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65);">
-          Last updated: April 2026
+          Last updated: <time datetime="2026-11-08">November 8, 2026</time>
         </p>
       </div>
     </section>
@@ -132,11 +133,11 @@ We take all privacy concerns seriously and will respond promptly. If you are not
     <!-- Content -->
     <section style="background: #FAF7F2;">
       <div class="section-container">
-        <div style="display: grid; grid-template-columns: 1fr; gap: 0;" class="privacy-layout">
+        <div class="legal-layout">
 
           <!-- Table of contents (sidebar on desktop) -->
-          <aside style="margin-bottom: 48px;">
-            <div style="background: white; border: 1px solid #E8E3D9; border-radius: 10px; padding: 24px; position: sticky; top: 88px;">
+          <aside class="legal-contents">
+            <div class="legal-contents-panel">
               <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 16px;">
                 Contents
               </p>
@@ -162,11 +163,11 @@ We take all privacy concerns seriously and will respond promptly. If you are not
 
             <!-- Intro paragraph -->
             <p style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 300; color: #3D3D5C; line-height: 1.8; border-left: 3px solid #C4973A; padding-left: 20px;">
-              Entrypoint Canada Immigration Services is committed to protecting your privacy. This policy explains what personal information we collect, why we collect it, and how it is used and protected. By contacting us or using our website, you agree to the practices described in this policy.
+              This policy explains what Entrypoint Canada Immigration Services collects when you contact us, how we use and protect it, and how to ask about your information.
             </p>
 
             {sections.map((section) => (
-              <article id={section.id} style="scroll-margin-top: 140px;">
+              <article id={section.id} class="legal-section">
                 <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; color: #1A1A2E; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #E8E3D9;">
                   {section.title}
                 </h2>
@@ -185,6 +186,11 @@ We take all privacy concerns seriously and will respond promptly. If you are not
                       <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #3D3D5C; line-height: 1.8;">{block.trim()}</p>
                     )
                   ))}
+                  {section.links && (
+                    <ul class="legal-action-links" role="list">
+                      {section.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+                    </ul>
+                  )}
                 </div>
               </article>
             ))}
@@ -192,7 +198,7 @@ We take all privacy concerns seriously and will respond promptly. If you are not
             <!-- Footer note -->
             <div style="background: white; border: 1px solid #E8E3D9; border-left: 3px solid #3D1215; border-radius: 10px; padding: 24px 28px; margin-top: 8px;">
               <p style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 300; color: #45465E; line-height: 1.7;">
-                This privacy policy may be updated from time to time. The "Last updated" date above reflects the most recent revision. Continued use of our services after any changes constitutes acceptance of the updated policy. For questions, contact us at
+                The date at the top of this page shows when we last revised this policy. For questions, contact us at
                 <a href="mailto:info@entrypointcanada.com" style="color: #3D1215; text-decoration: underline; font-weight: 400;">info@entrypointcanada.com</a>.
               </p>
             </div>
@@ -216,24 +222,7 @@ We take all privacy concerns seriously and will respond promptly. If you are not
     color: #3D1215;
   }
 
-  @media (min-width: 900px) {
-    .privacy-layout {
-      grid-template-columns: 220px 1fr !important;
-      gap: 56px !important;
-      align-items: start;
-    }
-    aside {
-      margin-bottom: 0 !important;
-    }
-  }
-</style>
-
-<style>
   @media (max-width: 768px) {
     .page-hero-inner h1 { font-size: 32px !important; }
-    /* TOC sidebar stacks above content — already single col at mobile */
-    .privacy-layout aside {
-      position: static !important; /* un-sticky TOC on mobile */
-    }
   }
 </style>

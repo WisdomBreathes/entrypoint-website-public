@@ -24,7 +24,8 @@ const sections = [
   {
     id: 'consultant-client',
     title: '4. Consultant-Client Relationship',
-    content: `A formal consultant-client relationship is established only upon execution of a signed retainer agreement. Submitting a contact form, sending an email, or attending a consultation does not constitute the commencement of representation.`,
+    content: `Sending an inquiry does not engage us to act on your behalf. An initial consultation requires a written consultation agreement. Any further services, including representation, require a separate written service agreement before that work begins.`,
+    links: [{ label: 'Code of Professional Conduct, sections 23 and 24', href: 'https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-128/page-2.html' }],
   },
   {
     id: 'accuracy',
@@ -34,7 +35,7 @@ const sections = [
   {
     id: 'intellectual-property',
     title: '6. Intellectual Property',
-    content: `All content on this website — including text, design, and layout — is the property of Entrypoint Canada Immigration Services unless otherwise noted. You may not reproduce, distribute, or republish any content without written permission.`,
+    content: `Original site content belongs to Entrypoint Canada Immigration Services unless otherwise noted. Photographs and other third-party material may be owned or licensed separately. Any reuse must comply with applicable law and licence terms.`,
   },
   {
     id: 'third-party-links',
@@ -44,12 +45,13 @@ const sections = [
   {
     id: 'limitation-of-liability',
     title: '8. Limitation of Liability',
-    content: `To the fullest extent permitted by law, Entrypoint Canada Immigration Services and Sabiha Iftakhar, RCIC, shall not be liable for any damages arising from your use of this website or reliance on its content.`,
+    content: `To the fullest extent permitted by law, Entrypoint Canada Immigration Services and Sabiha Iftakhar, RCIC, are not liable for damages arising from your use of this website or reliance on its general information. Nothing in these terms limits rights or professional obligations that cannot be excluded by law.`,
   },
   {
     id: 'disclaimer',
     title: '9. Disclaimer',
-    content: `Canadian immigration programs, eligibility requirements, intake periods, and processing times are subject to change at any time without notice. Changes may be made by IRCC, provincial governments, the CICC, or other regulatory bodies. Information provided here may not reflect the most current developments. Always verify current requirements directly with IRCC at canada.ca/immigration or through a regulated consultant. Nothing provided here should be construed as a guarantee, promise, or representation of any particular immigration outcome.`,
+    content: `Canadian immigration programs, eligibility rules, intake periods and processing times can change. Before you apply, check the requirements with the authority responsible for the program or speak to a regulated consultant.`,
+    links: [{ label: 'Immigration, Refugees and Citizenship Canada', href: 'https://www.canada.ca/en/services/immigration-citizenship.html' }],
   },
   {
     id: 'governing-law',
@@ -59,7 +61,11 @@ const sections = [
   {
     id: 'contact',
     title: '11. Contact',
-    content: `For questions about these terms, contact us at info@entrypointcanada.com.`,
+    content: `Contact our office if you have a question about these terms. Our Privacy Policy explains how we handle personal information.`,
+    links: [
+      { label: 'Email our office', href: 'mailto:info@entrypointcanada.com' },
+      { label: 'Privacy Policy', href: `${base}privacy/` },
+    ],
   },
 ];
 ---
@@ -88,7 +94,7 @@ const sections = [
           Important conditions governing the use of this website, its content, and initial contact through the site.
         </p>
         <p style="font-family: Inter, sans-serif; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65);">
-          Last updated: April 2026
+          Last updated: <time datetime="2026-11-08">November 8, 2026</time>
         </p>
       </div>
     </section>
@@ -96,11 +102,11 @@ const sections = [
     <!-- Content -->
     <section style="background: #FAF7F2;">
       <div class="section-container">
-        <div style="display: grid; grid-template-columns: 1fr; gap: 0;" class="privacy-layout">
+        <div class="legal-layout">
 
           <!-- Table of contents (sidebar on desktop) -->
-          <aside style="margin-bottom: 48px;">
-            <div style="background: white; border: 1px solid #E8E3D9; border-radius: 10px; padding: 24px; position: sticky; top: 88px;">
+          <aside class="legal-contents">
+            <div class="legal-contents-panel">
               <p style="font-family: Inter, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 16px;">
                 Contents
               </p>
@@ -126,11 +132,11 @@ const sections = [
 
             <!-- Intro paragraph -->
             <p style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 300; color: #3D3D5C; line-height: 1.8; border-left: 3px solid #C4973A; padding-left: 20px;">
-              Please read these Terms of Use carefully before using entrypointcanada.com. By using this website, you acknowledge that you have read, understood, and agree to be bound by these terms.
+              These terms apply to the website and initial inquiries. Any consultation or representation is covered by a separate agreement.
             </p>
 
             {sections.map((section) => (
-              <article id={section.id} style="scroll-margin-top: 140px;">
+              <article id={section.id} class="legal-section">
                 <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; color: #1A1A2E; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #E8E3D9;">
                   {section.title}
                 </h2>
@@ -149,6 +155,11 @@ const sections = [
                       <p style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 300; color: #3D3D5C; line-height: 1.8;">{block.trim()}</p>
                     )
                   ))}
+                  {section.links && (
+                    <ul class="legal-action-links" role="list">
+                      {section.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+                    </ul>
+                  )}
                 </div>
               </article>
             ))}
@@ -180,23 +191,7 @@ const sections = [
     color: #3D1215;
   }
 
-  @media (min-width: 900px) {
-    .privacy-layout {
-      grid-template-columns: 220px 1fr !important;
-      gap: 56px !important;
-      align-items: start;
-    }
-    aside {
-      margin-bottom: 0 !important;
-    }
-  }
-</style>
-
-<style>
   @media (max-width: 768px) {
     .page-hero-inner h1 { font-size: 32px !important; }
-    .privacy-layout aside {
-      position: static !important;
-    }
   }
 </style>
